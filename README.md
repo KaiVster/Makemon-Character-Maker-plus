@@ -21,18 +21,20 @@
   - (You could also download python or node.js here, but it's not a must).
  
 
-## How to Run
+## How to Run it locally
+- Copy the repo or download it as a zip.
+- Extract it somewhere.
+- Double click the `Start.bat` file.
 
-Double click the `Start.bat` file.
 
+## Planned Features
 
-## Planned Features & fixes
-
-- changing the english title image
-- adding icon for the tab
+- changing the english title image.
+- adding icon for the tab.
 - More character parts and categories.
 - Multi-select for items within a category (e.g., multiple accessories) with reordering layer support.
 - Individual color selection for different character parts (not just body color).
+
 
 ## Credits
 
@@ -40,4 +42,4 @@ Double click the `Start.bat` file.
 - **Plus Version** by [KaiVs](https://x.com/KaiVster)
 
 
-I would love if anyone who use this can make it better and improve this, and please credit me if you do so! <3
+If anyone has any suggestions and want to help, please open an issue and discuss it with me! <3

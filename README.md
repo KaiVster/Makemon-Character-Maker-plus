@@ -1,5 +1,5 @@
 # Makemon Character Maker Plus
-- **Test it here!** (https://kaivster.github.io/Makemon-Character-Maker-plus/app/Makemon.html)
+- [**Test it here!](https://kaivster.github.io/Makemon-Character-Maker-plus/app/Makemon.html)
 
 ## Main additions
 

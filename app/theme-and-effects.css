@@ -1,0 +1,216 @@
+/* ==========================================================================
+   THEME & VISUAL EFFECTS
+   ========================================================================== */
+
+/*
+ * ---------------------------------------------------------------------------
+ *  1. Theme Definitions (Light, Dark, AMOLED)
+ * --------------------------------------------------------------------------- */
+
+:root {
+  /* Default (Light Theme) */
+  --body-true-opaque-bg-color: #eeeeee;
+  --content-container-bg-color: #ffffff; /* White for content on light theme */
+  --background-image-tint-color: rgba(
+    220,
+    220,
+    220,
+    0.25
+  ); /* Tint for body::after */
+  --content-glass-bg: rgba(255, 255, 255, 0.7);
+  --content-glass-border-color: rgba(200, 200, 200, 0.4);
+  --bg-color: #eeeeee;
+  --text-color: #333333;
+  --primary-accent-color: #0066cc; /* links color */
+  --secondary-accent-color: #555555;
+  --button-bg-color: #f0f0f0;
+  --button-text-color: #333333;
+  --button-border-color: #ccc;
+  --button-hover-bg-color: #e0e0e0;
+  --button-selected-bg-color: #d0d0d0;
+  --button-selected-text-color: #333;
+  --border-color: #666;
+  --tooltip-bg-color: #333;
+  --tooltip-text-color: #fff;
+  --footer-glass-background: rgba(238, 238, 238, 0.55); /* Light theme glass */
+  --footer-border-color: rgba(
+    102,
+    102,
+    102,
+    0.3
+  ); /* Lighter border for light theme */
+  
+  
+  /* Light arrow Keys for input spinner */
+  --input-spinner-up-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23333333' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23333333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-up-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23000000' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23000000' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+body.theme-dark {
+  --body-true-opaque-bg-color: #333333;
+  --content-container-bg-color: #272727; /* Dark gray for content on dark theme */
+  --background-image-tint-color: rgba(40, 40, 40, 0.5);
+  --content-glass-bg: rgba(60, 60, 60, 0.7);
+  --content-glass-border-color: rgba(100, 100, 100, 0.4);
+  --bg-color: #333333;
+  --text-color: #eeeeee;
+  --primary-accent-color: #66ccff;
+  --secondary-accent-color: #bbbbbb;
+  --button-bg-color: #555555;
+  --button-text-color: #eeeeee;
+  --button-border-color: #777777;
+  --button-hover-bg-color: #666666;
+  --button-selected-bg-color: #444444;
+  --button-selected-text-color: #eeeeee;
+  --border-color: #888;
+  --tooltip-bg-color: #222;
+  --tooltip-text-color: #ddd;
+  --footer-glass-background: rgba(51, 51, 51, 0.55); /* Dark theme glass */
+  --footer-border-color: rgba(
+    136,
+    136,
+    136,
+    0.3
+  ); /* Lighter border for dark theme */
+
+  /* Dark arrow Keys for input spinner */
+  --input-spinner-up-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23EEEEEE' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23EEEEEE' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-up-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23FFFFFF' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23FFFFFF' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+body.theme-amoled {
+  --body-true-opaque-bg-color: #000000;
+  --content-container-bg-color: #121212; /* Very dark gray for content on AMOLED */
+  --background-image-tint-color: rgba(20, 20, 20, 0.6);
+  --content-glass-bg: rgba(35, 35, 35, 0.7);
+  --content-glass-border-color: rgba(85, 85, 85, 0.4);
+  --bg-color: #000000;
+  --text-color: #dddddd; /* Slightly off-white for AMOLED readability */
+  --primary-accent-color: #007bff;
+  --secondary-accent-color: #aaaaaa;
+  --button-bg-color: #1a1a1a;
+  --button-text-color: #dddddd;
+  --button-border-color: #333333;
+  --button-hover-bg-color: #2a2a2a;
+  --button-selected-bg-color: #111111;
+  --button-selected-text-color: #dddddd;
+  --border-color: #444;
+  --tooltip-bg-color: #111;
+  --tooltip-text-color: #ccc;
+  --footer-glass-background: rgba(20, 20, 20, 0.55); /* AMOLED theme glass */
+  --footer-border-color: rgba(
+    68,
+    68,
+    68,
+    0.3
+  ); /* Lighter border for AMOLED theme */
+
+  /* Dark arrow Keys for input spinner */
+  --input-spinner-up-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23DDDDDD' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23DDDDDD' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-up-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23FFFFFF' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23FFFFFF' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  2. Background Effects (Crossfade, Blur, Tint)
+ * --------------------------------------------------------------------------- */
+
+/* Shared styles for both background layers */
+#background-container-1,
+#background-container-2 {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: calc(100% + 24px);
+  height: calc(100% + 24px);
+  background-size: auto;
+  background-position: center center;
+  background-attachment: scroll;
+  background-repeat: repeat;
+  box-shadow: none;
+  box-sizing: border-box;
+  transition: filter 0.5s ease; /* For the blur toggle */
+  filter: blur(2px);
+}
+
+/* Add a pseudo-element for a clean, non-vignette tint */
+#background-container-1::after,
+#background-container-2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-image-tint-color);
+  z-index: 0; /* Sit on top of parent's bg image */
+}
+
+/* Layer 1: The bottom layer, always present */
+#background-container-1 {
+  z-index: -2;
+}
+
+/* Layer 2: The top layer, used for fading in */
+#background-container-2 {
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.75s ease; /* CONTROLS FADE SPEED. Total "change background" disable time is 2x this value. */
+}
+
+/* State class to trigger the fade */
+body.is-crossfading #background-container-2 {
+  opacity: 1;
+}
+
+/* Blur Toggle */
+body.background-blur-disabled #background-container-1,
+body.background-blur-disabled #background-container-2 {
+  filter: blur(0px);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  3. Content Panels & Frosted Glass
+ * --------------------------------------------------------------------------- */
+
+table.bg {
+  /* The table now handles the transition between solid and glass */
+  background-color: var(--content-container-bg-color);
+  transition: background-color 0.5s ease, backdrop-filter 0.5s ease;
+  /* This ensures the background respects the rounded corners from the .border class */
+  border-radius: 10px;
+  overflow: hidden; /* Clips the blurred content to the rounded corners */
+}
+
+/* When frosted glass is on, the TABLE gets the effect for a seamless look. */
+body.frosted-content-active table.bg {
+  background-color: var(--content-glass-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.content-panel {
+  /* Panels are now always transparent; background is handled by parent table. */
+  background-color: transparent;
+  transform: translateZ(0); /* Keep for rendering performance */
+  /* Transitions are now on the parent table, so we can remove them here. */
+  transition: none;
+  border: none; /* Explicitly remove cell borders to prevent seams. */
+}
+
+/* Apply frosted glass to footer */
+footer {
+  transition: background-color 0.5s ease, backdrop-filter 0.5s ease;
+  background-color: var(--footer-glass-background) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  border-top: 1px solid var(--footer-border-color) !important;
+}

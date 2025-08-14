@@ -1,0 +1,226 @@
+/**
+ * ---------------------------------------------------------------------------
+ *  1. Global Styles
+ * --------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  background-color: var(--body-true-opaque-bg-color);
+  color: var(--text-color);
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  2. Main Layout (Flexbox)
+ * --------------------------------------------------------------------------- */
+
+.main-layout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  max-width: 570px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.content-column {
+  flex: 1;
+  min-width: 0;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  3. Content Panels & Tables
+ * --------------------------------------------------------------------------- */
+
+.content-panel {
+  padding: 15px;
+  background-color: transparent;
+  width: 100%;
+  min-width: 100px;
+  box-sizing: border-box;
+}
+
+.content-panel img[src="Makemon/daimei.png"],
+.content-panel img[src^="data:image/png;base64"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-panel img[src="Makemon/daimei.png"] {
+  margin-bottom: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.bg {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  4. Footer
+ * --------------------------------------------------------------------------- */
+
+footer {
+  width: 100%;
+  padding: 20px 0;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: auto;
+}
+
+.credits-container p {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+.credits-container a {
+  color: var(--primary-accent-color);
+  text-decoration: none;
+}
+
+.credits-container a:hover {
+  text-decoration: underline;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  5. General Typography & Utility
+ * --------------------------------------------------------------------------- */
+
+h1 {
+  color: var(--text-color);
+  text-align: center;
+}
+
+h2 {
+  color: var(--secondary-accent-color);
+}
+
+a {
+  color: var(--primary-accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin: 10px 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.center {
+  text-align: center;
+}
+.padding {
+  padding: 25px;
+}
+.section {
+  font-size: small;
+}
+
+.border {
+  border-color: var(--border-color);
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 2px;
+  margin: 3px;
+}
+
+.margin {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 570px;
+}
+
+/* Hide specific translation keys if necessary */
+[data-translate-key="sectionHeaderBodyColor"] {
+  display: none !important;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  6. Responsive Design (Media Queries)
+ * --------------------------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .main-layout-container {
+    gap: 10px;
+  }
+
+  .content-column {
+    width: 100% !important;
+    flex-basis: auto !important;
+  }
+
+  img[data-mkresult="true"] {
+    margin: 10px auto;
+  }
+
+  .main-layout-container > .preview-sticky-container {
+    position: absolute !important;
+    visibility: hidden !important;
+  }
+
+  .main-layout-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .main-layout-container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 910px;
+  }
+
+  .content-column {
+    flex: 0 0 570px;
+  }
+
+  .preview-sticky-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10px;
+
+    flex: 0 0 320px;
+    align-self: flex-start;
+  }
+
+  .content-column table.margin {
+    width: 100%;
+    max-width: 570px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

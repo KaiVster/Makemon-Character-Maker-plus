@@ -1,0 +1,226 @@
+/* ==========================================================================
+   UI COMPONENTS
+   ========================================================================== */
+
+/*
+ * ---------------------------------------------------------------------------
+ *  1. Themed Inputs and Color Picker
+ * --------------------------------------------------------------------------- */
+
+/* Themed styles for input fields */
+.themed-input {
+  background-color: var(--button-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--button-border-color);
+  border-radius: 4px;
+  padding: 5px 10px 5px 5px; /* Add padding for arrows */
+  width: 60px; /* Consistent width for RGB inputs */
+  text-align: center;
+  background-image: var(--input-spinner-up-icon), var(--input-spinner-down-icon);
+  background-repeat: no-repeat, no-repeat;
+  background-position: right 5px top 2px, right 5px bottom 2px;
+  background-size: 10px 10px;
+}
+
+.themed-input.arrow-hover {
+  cursor: pointer;
+  background-image: var(--input-spinner-up-icon-hover),
+    var(--input-spinner-down-icon-hover);
+}
+
+/* Hide the default spinner buttons */
+.themed-input::-webkit-outer-spin-button,
+.themed-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+.themed-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Style for the color swatch input */
+#custom-color-picker {
+  width: 50px;
+  height: 50px;
+  border: none; /* Remove default browser border */
+  padding: 0; /* Remove default padding */
+  cursor: pointer;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  2. Sticky Preview Image
+ * --------------------------------------------------------------------------- */
+
+/* Default state for the preview container (mobile, non-sticky) */
+.preview-sticky-container {
+  /* Behaves like a normal div in its original table cell */
+  width: auto; /* Takes the width of its content or parent constraints */
+}
+
+/* Image within the container (applies generally) */
+.preview-sticky-container img[data-mkresult="true"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%; /* Max width relative to its container */
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white; /* Add white background for display */
+  width: 300px;
+  height: 300px;
+}
+
+/* When the original container should be hidden but still take up space */
+.original-is-hidden {
+  visibility: hidden !important;
+}
+
+/* this is exclusively for the cloned sticky element on mobile ui */
+@media (max-width: 768px) {
+  .is-sticky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: var(--panel-bg-color);
+    padding: 5px 0;
+    text-align: center;
+  }
+
+  .is-sticky img[data-mkresult="true"] {
+    max-width: 300px; /* Or desired width for sticky mobile view */
+    height: auto;
+  }
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  2. Buttons (General, Language, Theme, Feature)
+ * --------------------------------------------------------------------------- */
+
+/* Main Control Button Containers */
+#language-switcher,
+#theme-switcher,
+#feature-controls {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Shared Button Styles */
+#language-switcher button,
+#theme-switcher button,
+#background-changer button,
+#toggleFrostedGlassButton,
+.ui-controls-panel button {
+  padding: 8px 15px;
+  border: 2px outset var(--button-border-color);
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  margin: 0 8px;
+  font-weight: bold;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+  border-radius: 4px;
+}
+
+/* A general-purpose button style for dynamically created buttons */
+.ui-button {
+  padding: 8px 15px;
+  border: 2px outset var(--button-border-color);
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  margin: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+  border-radius: 4px;
+}
+
+.ui-button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+/* Hover State */
+#language-switcher button:hover,
+#theme-switcher button:hover,
+#background-changer button:hover,
+#toggleFrostedGlassButton:hover,
+.ui-controls-panel button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+/* Selected/Active State */
+#language-switcher button.lang-selected,
+#theme-switcher button.theme-selected,
+#background-changer button.theme-selected,
+body.frosted-content-active #toggleFrostedGlassButton {
+  background-color: var(--button-selected-bg-color);
+  border-style: inset;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+  color: var(--button-selected-text-color);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  3. Color Picker
+ * --------------------------------------------------------------------------- */
+
+.block {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  font-size: 0px;
+  padding: 0;
+  margin: 2px;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.color-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#selected-color-display {
+  width: 64px;
+  height: 32px;
+  box-sizing: border-box;
+}
+
+#custom-color-picker {
+  width: 50px;
+  height: 50px;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  4. Tooltips & Selection
+ * --------------------------------------------------------------------------- */
+
+.mkselect {
+  border-color: #f00;
+}
+
+.mktooltipcontainer {
+  position: absolute;
+}
+
+.mktooltip {
+  background-color: var(--tooltip-bg-color);
+  border-color: var(--tooltip-bg-color);
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  color: var(--tooltip-text-color);
+  font-weight: bold;
+  padding: 2px;
+}

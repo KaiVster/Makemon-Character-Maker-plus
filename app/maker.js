@@ -1,9 +1,11 @@
-/*	
-	Original maker.js creator: Sho
-	http://furrytail.sakura.ne.jp/
-  
-	+ (Plus) added functions: KaiVs
-*/
+/**
+ * @fileoverview Makemon Character Maker - Core image compositing engine
+ * @author Sho (Original) - http://furrytail.sakura.ne.jp/
+ * @author KaiVs (Plus enhancements)
+ */
+
+/** @constant {number} Maximum RGB channel value */
+const MAX_RGB = 255;
 
 class Maker {
   constructor() {
@@ -74,7 +76,8 @@ class Maker {
   }
 
   /**
-   * @brief Updates the icon image.
+   * Updates the final character icon by compositing all selected layers.
+   * @returns {void}
    */
   updateResultImage() {
     this.resultContext.clearRect(
@@ -83,14 +86,23 @@ class Maker {
       this.resultCanvas.width,
       this.resultCanvas.height
     );
+
+    // Cache all selected images once to avoid repeated DOM queries
+    const selectedImages = document.querySelectorAll('[data-mkselect]');
+    const imagesByLayer = new Map();
+    selectedImages.forEach((img) => {
+      const layer = img.getAttribute('data-mklayer');
+      if (layer !== null) {
+        imagesByLayer.set(parseInt(layer, 10), img);
+      }
+    });
+
     for (let i = 0; i <= this.maxLayer; ++i) {
-      const image = document.querySelector(
-        `[data-mklayer="${i}"][data-mkselect]`
-      );
+      const image = imagesByLayer.get(i);
       if (image) {
-        if (image.getAttribute("data-mkclip")) {
+        if (image.hasAttribute("data-mkclip")) {
           this.clipImage(image);
-        } else if (image.getAttribute("data-mkcolor")) {
+        } else if (image.hasAttribute("data-mkcolor")) {
           this.drawColorImage(image);
         } else {
           this.drawImage(image);
@@ -98,11 +110,13 @@ class Maker {
       }
     }
     this.resultImage.setAttribute("src", this.resultCanvas.toDataURL());
-    if (window.syncStickyPreviewImage) window.syncStickyPreviewImage();
+    window.syncStickyPreviewImage?.();
   }
 
   /**
-   * @brief Draws the specified image on the internal canvas.
+   * Draws an image layer with line/fill color blending applied.
+   * @param {HTMLImageElement} image - The source image to draw
+   * @returns {void}
    */
   drawImage(image) {
     this.workContext.clearRect(
@@ -125,15 +139,16 @@ class Maker {
       this.workCanvas.height
     );
     const data = imageData.data;
+
+    // Cache color values outside loop for performance
+    const { red: lineR, green: lineG, blue: lineB } = this.lineColor;
+    const { red: fillR, green: fillG, blue: fillB } = this.fillColor;
+
     for (let i = 0; i < data.length; i += 4) {
-      data[i] =
-        this.lineColor.red * (255 - data[i]) + this.fillColor.red * data[i];
-      data[i + 1] =
-        this.lineColor.green * (255 - data[i + 1]) +
-        this.fillColor.green * data[i + 1];
-      data[i + 2] =
-        this.lineColor.blue * (255 - data[i + 2]) +
-        this.fillColor.blue * data[i + 2];
+      const r = data[i], g = data[i + 1], b = data[i + 2];
+      data[i] = lineR * (MAX_RGB - r) + fillR * r;
+      data[i + 1] = lineG * (MAX_RGB - g) + fillG * g;
+      data[i + 2] = lineB * (MAX_RGB - b) + fillB * b;
     }
     this.workContext.putImageData(imageData, 0, 0);
     this.resultContext.drawImage(
@@ -146,7 +161,9 @@ class Maker {
   }
 
   /**
-   * @brief Draws the specified image on the internal canvas without changing its color.
+   * Draws an image layer without color transformation (preserves original colors).
+   * @param {HTMLImageElement} image - The source image to draw
+   * @returns {void}
    */
   drawColorImage(image) {
     this.resultContext.drawImage(
@@ -159,7 +176,9 @@ class Maker {
   }
 
   /**
-   * @brief Masks the internal canvas using the specified image.
+   * Applies a clipping mask using the specified image.
+   * @param {HTMLImageElement} image - The mask image
+   * @returns {void}
    */
   clipImage(image) {
     this.workContext.clearRect(
@@ -189,15 +208,22 @@ class Maker {
     );
     const workData = workImageData.data;
     const resultData = resultImageData.data;
+
+    // Cache color values outside loop for performance
+    const lineR = this.lineColor.red * MAX_RGB;
+    const lineG = this.lineColor.green * MAX_RGB;
+    const lineB = this.lineColor.blue * MAX_RGB;
+    const RGB_CHANNELS = 3;
+
     for (let i = 0; i < resultData.length; i += 4) {
       resultData[i + 3] = resultData[i + 3] - workData[i + 3];
       workData[i + 3] =
-        (((255 * 3 - workData[i] - workData[i + 1] - workData[i + 2]) / 3) *
+        (((MAX_RGB * RGB_CHANNELS - workData[i] - workData[i + 1] - workData[i + 2]) / RGB_CHANNELS) *
           workData[i + 3]) /
-        255;
-      workData[i] = this.lineColor.red * 255;
-      workData[i + 1] = this.lineColor.green * 255;
-      workData[i + 2] = this.lineColor.blue * 255;
+        MAX_RGB;
+      workData[i] = lineR;
+      workData[i + 1] = lineG;
+      workData[i + 2] = lineB;
     }
     this.workContext.putImageData(workImageData, 0, 0);
     this.resultContext.putImageData(resultImageData, 0, 0);
@@ -211,7 +237,9 @@ class Maker {
   }
 
   /**
-   * @brief Sets the specified image to the selected state.
+   * Selects an image part and marks it as the active choice for its layer.
+   * @param {HTMLImageElement} image - The image element to select
+   * @returns {void}
    */
   selectImage(image) {
     const layer = image.getAttribute("data-mklayer");
@@ -227,82 +255,130 @@ class Maker {
   }
 
   /**
-   * @brief Uses the specified color.
+   * Applies a color swatch as the current line or fill color.
+   * @param {HTMLElement} colorSwatch - The color swatch element with data-mkline or data-mkfill
+   * @returns {void}
    */
   selectColor(colorSwatch) {
-    let colorDataString;
-    let querySelector;
+    const isLineColor = colorSwatch.hasAttribute("data-mkline");
+    const isFillColor = colorSwatch.hasAttribute("data-mkfill");
 
-    if (colorSwatch.hasAttribute("data-mkline")) {
-      colorDataString = colorSwatch.getAttribute("data-mkline");
-      querySelector = "[data-mkline][data-mkselect]";
-    } else if (colorSwatch.hasAttribute("data-mkfill")) {
-      colorDataString = colorSwatch.getAttribute("data-mkfill");
-      querySelector = "[data-mkfill][data-mkselect]";
+    const colorDataString = isLineColor
+      ? colorSwatch.getAttribute("data-mkline")
+      : isFillColor
+        ? colorSwatch.getAttribute("data-mkfill")
+        : null;
+
+    if (!colorDataString) return;
+
+    const [red, green, blue] = colorDataString.split(",").map(parseFloat);
+    const colorObject = { red, green, blue };
+
+    if (isLineColor) {
+      this.lineColor = colorObject;
+    } else {
+      this.fillColor = colorObject;
     }
 
-    if (colorDataString) {
-      const colorData = colorDataString.split(",");
-      const colorObject = {
-        red: parseFloat(colorData[0]),
-        green: parseFloat(colorData[1]),
-        blue: parseFloat(colorData[2]),
-      };
+    const querySelector = isLineColor
+      ? "[data-mkline][data-mkselect]"
+      : "[data-mkfill][data-mkselect]";
+    const currentSelected = document.querySelector(querySelector);
+    currentSelected?.classList.remove("mkselect");
+    currentSelected?.removeAttribute("data-mkselect");
 
-      if (colorSwatch.hasAttribute("data-mkline")) {
-        this.lineColor = colorObject;
-      } else {
-        this.fillColor = colorObject;
-      }
-
-      const currentSelected = document.querySelector(querySelector);
-      if (currentSelected) {
-        currentSelected.classList.remove("mkselect");
-        currentSelected.removeAttribute("data-mkselect");
-      }
-      colorSwatch.classList.add("mkselect");
-      colorSwatch.setAttribute("data-mkselect", "true");
-    }
+    colorSwatch.classList.add("mkselect");
+    colorSwatch.setAttribute("data-mkselect", "true");
   }
 }
 
 function addTooltip(image) {
+  // Remove any existing tooltip first so we always have one visible instance
+  deleteTooltip();
+
   const container = image.parentNode;
-  // Prevent adding multiple tooltips
-  if (container.querySelector(".mktooltipcontainer")) {
-    return;
+
+  // Ensure positioning context so the tooltip can align relative to this container
+  const computedPos = window.getComputedStyle(container).position;
+  if (computedPos === "static" || !computedPos) {
+    container.style.position = "relative";
   }
 
   const key = image.dataset.translateAltKey;
   const altText = image.getAttribute("alt");
-  let tooltipText = altText; // Default to alt text
-
-  if (
-    key &&
-    window.languageManager &&
-    typeof window.languageManager.getTranslation === "function"
-  ) {
-    // Use the getTranslation function, providing the original alt text as a fallback.
-    tooltipText = window.languageManager.getTranslation(key, altText);
-  }
+  // Use optional chaining for cleaner null checks
+  const tooltipText = window.languageManager?.getTranslation?.(key, altText) ?? altText;
 
   const span = document.createElement("span");
   const innerSpan = document.createElement("span");
   span.setAttribute("class", "mktooltipcontainer");
+  // Inline fallbacks so visibility doesn't depend solely on CSS load order
+  span.style.position = "fixed";
+  span.style.display = "block";
+  span.style.pointerEvents = "none";
+  span.style.zIndex = "3000";
+  span.style.whiteSpace = "normal";
+  span.style.maxWidth = "calc(100vw - 16px)";
+  span.style.textAlign = "center";
   innerSpan.setAttribute("class", "mktooltip");
   innerSpan.innerText = tooltipText;
+  // Ensure visual styling even if CSS is late
+  innerSpan.style.backgroundColor = "var(--tooltip-bg-color, #222)";
+  innerSpan.style.color = "var(--tooltip-text-color, #fff)";
+  innerSpan.style.borderRadius = "5px";
+  innerSpan.style.border = "1px solid var(--tooltip-bg-color, #222)";
+  innerSpan.style.padding = "4px 6px";
+  innerSpan.style.fontWeight = "bold";
+  innerSpan.style.display = "inline-block";
+  innerSpan.style.wordBreak = "break-word";
+  innerSpan.style.boxShadow = "0 2px 6px rgba(0,0,0,0.25)";
+
+  // Position tooltip centered over the image itself (not the full row)
+  const rect = image.getBoundingClientRect();
+  const viewportPadding = 8; // prevent touching edges
+  const leftPx = Math.min(
+    Math.max(rect.left + rect.width / 2, viewportPadding),
+    window.innerWidth - viewportPadding
+  );
+  // Place above the image with a small gap, but keep at least viewportPadding visible
+  const topPx = Math.max(rect.top - 12, viewportPadding);
+
+  span.style.left = `${leftPx}px`;
+  span.style.top = `${topPx}px`;
+  // Keep X-centered and lift fully above the part
+  span.style.transform = "translate(-50%, -100%)";
+
   span.appendChild(innerSpan);
-  container.insertBefore(span, image);
+  // Append to body so it won't be clipped by container overflow
+  document.body.appendChild(span);
 }
 
+/**
+ * Removes any existing tooltip from the DOM.
+ * @returns {void}
+ */
 function deleteTooltip() {
-  const tooltipElement = document.querySelector(".mktooltipcontainer");
-  if (tooltipElement) {
-    tooltipElement.remove();
-  }
+  document.querySelector(".mktooltipcontainer")?.remove();
 }
 
 // Processing
-window.addEventListener("load", () => {
+let makerInitialized = false;
+
+/**
+ * Initializes the Maker instance and dispatches a ready event.
+ * @returns {Maker} The singleton Maker instance
+ */
+function initMaker() {
+  if (makerInitialized) return window.makerInstance;
   window.makerInstance = new Maker();
-});
+  makerInitialized = true;
+  // Dispatch event for dependent modules instead of requiring polling
+  window.dispatchEvent(new CustomEvent('makerReady', { detail: window.makerInstance }));
+  return window.makerInstance;
+}
+
+if (window.autoInitMaker !== false) {
+  window.addEventListener("load", initMaker);
+}
+
+window.initMaker = initMaker;

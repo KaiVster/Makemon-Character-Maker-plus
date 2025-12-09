@@ -1,6 +1,6 @@
 @echo off
 echo Makemon Character Maker + (Windows)
-echo ===========================
+echo ===================================
 echo.
 
 :: Check if Python is available (preferred)
@@ -10,8 +10,7 @@ if %ERRORLEVEL% EQU 0 (
     echo Server running at http://localhost:8000
     echo Press Ctrl+C to stop the server
     echo.
-    start http://localhost:8000/app/Makemon.html
-
+    start http://localhost:8000/
     python -m http.server 8000
     goto :EOF
 )
@@ -23,8 +22,7 @@ if %ERRORLEVEL% EQU 0 (
     echo Server running at http://localhost:8000
     echo Press Ctrl+C to stop the server
     echo.
-    start http://localhost:8000/app/Makemon.html
-
+    start http://localhost:8000/
     python3 -m http.server 8000
     goto :EOF
 )
@@ -37,19 +35,56 @@ if %ERRORLEVEL% EQU 0 (
     echo Server running at http://localhost:8000
     echo Press Ctrl+C to stop the server
     echo.
-    start http://localhost:8000/app/Makemon.html
-
+    start http://localhost:8000/
     npx http-server -p 8000
     goto :EOF
 )
 
-:: Fallback to PowerShell script
+:: Fallback to PowerShell embedded server
 echo.
-echo Python and Node.js not found or failed to start.
-echo Attempting to launch server using Start PowerShell.bat...
-echo If Start PowerShell.bat is missing, please ensure it's in the same directory as Start.bat.
+echo Python and Node.js not found. Starting PowerShell server...
+echo Server running at http://localhost:8000
+echo Press Ctrl+C to stop the server
 echo.
-call "%~dp0Start PowerShell.bat"
-goto :EOF
+
+powershell -ExecutionPolicy Bypass -Command ^
+$listener = New-Object System.Net.HttpListener; ^
+$listener.Prefixes.Add('http://localhost:8000/'); ^
+$listener.Start(); ^
+Start-Process 'http://localhost:8000/' -ErrorAction SilentlyContinue; ^
+Write-Host 'PowerShell Server running at http://localhost:8000'; ^
+Write-Host 'Press Ctrl+C to stop'; ^
+$mimeTypes = @{'.html'='text/html; charset=utf-8';'.js'='application/javascript; charset=utf-8';'.css'='text/css; charset=utf-8';'.png'='image/png';'.jpg'='image/jpeg';'.gif'='image/gif';'.svg'='image/svg+xml';'.json'='application/json; charset=utf-8';'.otf'='font/otf';'.woff'='font/woff';'.woff2'='font/woff2'}; ^
+$rootPath = (Get-Location).Path; ^
+try { ^
+    while ($listener.IsListening) { ^
+        $context = $listener.GetContext(); ^
+        $request = $context.Request; ^
+        $response = $context.Response; ^
+        $localPath = $request.Url.LocalPath; ^
+        $requestedFile = ($localPath -replace '^/+', '' -replace '/', [System.IO.Path]::DirectorySeparatorChar); ^
+        if ($requestedFile -eq '' -or $requestedFile -eq [System.IO.Path]::DirectorySeparatorChar) { $requestedFile = 'index.html' }; ^
+        $filePath = Join-Path -Path $rootPath -ChildPath $requestedFile; ^
+        $normalizedFilePath = (Resolve-Path -Path $filePath -ErrorAction SilentlyContinue).Path; ^
+        if ($null -ne $normalizedFilePath -and $normalizedFilePath.StartsWith($rootPath) -and (Test-Path $normalizedFilePath -PathType Leaf)) { ^
+            $extension = [System.IO.Path]::GetExtension($normalizedFilePath).ToLowerInvariant(); ^
+            $contentType = $mimeTypes[$extension]; ^
+            if (-not $contentType) { $contentType = 'application/octet-stream' }; ^
+            $fileContent = [System.IO.File]::ReadAllBytes($normalizedFilePath); ^
+            $response.ContentType = $contentType; ^
+            $response.ContentLength64 = $fileContent.Length; ^
+            $response.OutputStream.Write($fileContent, 0, $fileContent.Length); ^
+        } else { ^
+            $response.StatusCode = 404; ^
+            $notFoundMessage = [System.Text.Encoding]::UTF8.GetBytes('404 Not Found: ' + $request.Url.LocalPath); ^
+            $response.ContentType = 'text/plain; charset=utf-8'; ^
+            $response.ContentLength64 = $notFoundMessage.Length; ^
+            $response.OutputStream.Write($notFoundMessage, 0, $notFoundMessage.Length); ^
+        }; ^
+        $response.Close(); ^
+    } ^
+} finally { ^
+    if ($listener.IsListening) { $listener.Stop() } ^
+}
 
 pause

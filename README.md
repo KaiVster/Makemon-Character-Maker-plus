@@ -1,45 +1,53 @@
-# Makemon Character Maker Plus
-[**Test it here!**](https://kaivster.github.io/Makemon-Character-Maker-plus/app/Makemon.html)
+# Makemon Character Maker +
+[**Try it here!**](https://kaivster.github.io/Makemon-Character-Maker-plus/)
 
-## Main additions
+## Main Additions
+### Features
+- **Layered Character Composition**
+- **Custom Color Picker**
+- **Randomizer**
+- **English and Japanese language support**
+- **Mobile Support**
 
-- Custom colour picker
-- Random character and body color
-- English & Japanese UI
-- Light, Dark, and AMOLED themes with frosted-glass effect
+### Themes & Effects
+- **Light, Dark, and AMOLED themes**
+- **Frosted glass effect**
+- **Background switching**
+- **Background blur toggle**
 
+---
 
-## Requirements
+### If you want to run this locally
+1. **Clone or download** the repository
+2. **Start the server:**
+   - **Windows:** Double-click `Start.bat`
+   - **Mac/Linux:** Run `./Start.sh` in terminal
+3. Open `http://localhost:8000` in your browser (if your browser does not automatically open it for you)
 
-**Mac/Linux:**
+### Requirements
 
-- Python (version 2 or 3) or Node.js with `npx`.
+| Platform | Options |
+|----------|---------|
+| Windows | Built-in PowerShell (no install needed), or Python/Node.js |
+| Mac/Linux | Python 2/3 or Node.js with `npx` |
 
-**Windows**
-
-- Windows script uses it's built-in PowerShell to start the local server (used as a fallback if python or node.js are not installed).
-  - (You could also download python or node.js here, but it's not a must).
- 
-
-## How to Run it locally
-- Copy the repo or download it as a zip.
-- Extract it somewhere.
-- Double click the `Start.bat` file.
-
-
-## Planned Features
-
-- changing the english title image.
-- adding icon for the tab.
-- More character parts and categories.
-- Multi-select for items within a category (e.g., multiple accessories) with reordering layer support.
-- Individual color selection for different character parts (not just body color).
-
+---
 
 ## Credits
+- **Original Version** by [BAYACHAO](https://x.com/BAYACHAO) - All original character assets and concept
+- **Plus Version** by [KaiVs](https://x.com/KaiVster) - Additional features and UI
 
-- **Original Version** by [BAYACHAO](https://x.com/BAYACHAO)
-- **Plus Version** by [KaiVs](https://x.com/KaiVster)
+### Usage Guidelines (from original creator)
+- Copyright belongs to [BAYACHAO](https://x.com/BAYACHAO)
+- When using as an icon, please credit this maker or include ID
+- Redistribution and commercial use of created images is prohibited
+- Created characters can only be used for fan works
 
+---
 
-If anyone has any suggestions and want to help, please open an issue and discuss it with me! <3
+## Contributing
+Have suggestions or want to help? Please [open an issue](https://github.com/KaiVster/Makemon-Character-Maker-plus/issues) and discuss it with me!
+
+## License
+© 2018 BAYACHAO. All Rights Reserved.  
+© 2025 KaiVs. All Rights Reserved.

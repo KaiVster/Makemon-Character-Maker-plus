@@ -1,11 +1,135 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="refresh" content="0; url=app/Makemon.html">
-    <title>Makemon Character Maker+</title>
-  </head>
-  <body>
-    <p>If not redirected, open <a href="app/Makemon.html">Makemon Character Maker+</a>.</p>
-  </body>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-translate-key="page_title">Makemon Character Maker +</title>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" type="text/css" href="app/styles.css" />
+
+  <!-- Core Scripts -->
+  <script>
+    window.autoInitMaker = false;
+  </script>
+  <script type="text/javascript" src="app/maker.js"></script>
+  <script type="text/javascript" src="app/catalog.js"></script>
+  <script type="text/javascript" src="app/color-picker.js"></script>
+  <script type="text/javascript" src="app/randomizer.js"></script>
+  <script type="text/javascript" src="app/translations.js"></script>
+  <script type="text/javascript" src="app/language-manager.js"></script>
+  <script type="text/javascript" src="app/settings.js"></script>
+  <script type="text/javascript" src="app/mobile-sticky.js"></script>
+</head>
+
+<body class="body">
+  <script>
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+  </script>
+
+  <div id="background-container-1"></div>
+  <div id="background-container-2"></div>
+
+  <div class="ui-controls-panel"></div>
+
+  <div class="main-layout-container">
+    <div class="content-column">
+      <div class="Header"></div>
+
+      <div class="settings-floating-container">
+        <button id="settings-toggle" class="settings-button desktop-settings-toggle" data-settings-toggle="true"
+          aria-expanded="false" aria-controls="settings-panel">
+          <span class="settings-button-icon" aria-hidden="true">⚙</span>
+          <span id="settings-button-text" class="sr-only" data-translate-key="settingsButtonLabel">Settings</span>
+        </button>
+        <div id="settings-panel" class="settings-panel" aria-hidden="true" tabindex="-1">
+          <div class="settings-group">
+            <p class="settings-group-label" data-translate-key="settingsLanguageLabel">
+              Language
+            </p>
+            <div id="language-switcher">
+              <button id="lang-en" class="ui-button" data-translate-key="lang_en">
+                EN
+              </button>
+              <button id="lang-ja" class="ui-button" data-translate-key="lang_ja">
+                JP
+              </button>
+            </div>
+          </div>
+          <div class="settings-group">
+            <p class="settings-group-label" data-translate-key="settingsThemeLabel">
+              Theme
+            </p>
+            <div id="theme-switcher">
+              <button id="theme-light" data-translate-key="themeLight">Light</button>
+              <button id="theme-dark" data-translate-key="themeDark">Dark</button>
+              <button id="theme-amoled" data-translate-key="themeAmoled">
+                AMOLED
+              </button>
+            </div>
+          </div>
+          <div class="settings-group">
+            <p class="settings-group-label" data-translate-key="settingsBackgroundLabel">
+              Background
+            </p>
+            <div id="background-changer">
+              <button id="changeBgButton" data-translate-key="changeBgButton">
+                Change Background
+              </button>
+              <button id="toggleBlurButton" data-translate-key="toggleBlur">
+                Blur
+              </button>
+              <button id="toggleFrostedGlassButton" data-translate-key="toggleFrostedGlass">
+                Frosted Glass
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <table class="bg border margin padding">
+        <tbody>
+          <tr>
+            <td class="center content-panel">
+              <img src="Makemon/daimei.png" id="titleImage" class="catalog-block" alt="Makemon Character Maker"
+                data-translate-alt-key="headerImageAlt" />
+
+              <!-- Original Creator Blurb -->
+              <div class="creator-blurb catalog-block" data-translate-key="creator_blurb"></div>
+
+              <img src="data:image/gif;base64,R0lGODlhAQABAPAAAP///wAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="300"
+                height="300" class="border" data-mkresult="true" />
+              <img src="Makemon/kansei.png" width="300" id="kansei-reference" alt="Kansei reference" />
+              <button id="settings-inline-toggle" class="settings-inline-toggle ui-button" data-settings-toggle="true"
+                aria-expanded="false" aria-controls="settings-panel" data-translate-key="settingsDrawerToggleLabel">
+                Quick Settings
+              </button>
+              <div id="settings-panel-placeholder"></div>
+
+              <div id="catalog-body-colors" class="catalog-block"></div>
+              <div id="catalog-main" class="catalog-block"></div>
+
+              <!-- Plus Version Credits -->
+              <div class="plus-credits catalog-block">
+                <p data-translate-key="plus_credits"></p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <div class="credits-container">
+      <p data-translate-key="footer_copyright"></p>
+    </div>
+  </footer>
+
+</body>
+
 </html>

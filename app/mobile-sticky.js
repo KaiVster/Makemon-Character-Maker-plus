@@ -1,9 +1,19 @@
+/**
+ * @fileoverview Mobile sticky preview functionality for Makemon Character Maker+
+ * Creates a floating preview image when scrolling on mobile devices.
+ */
+
+/** @constant {number} Maximum viewport width for mobile behavior */
+const MOBILE_MAX_WIDTH = 900;
+/** @constant {number} Scroll buffer to prevent flicker at threshold */
+const SCROLL_BUFFER_PX = 10;
+
 document.addEventListener("DOMContentLoaded", function () {
   const originalPreviewImage = document.querySelector(
     'img[data-mkresult="true"]'
   );
+  const kanseiImage = document.querySelector("#kansei-reference");
   const layoutContainer = document.querySelector(".main-layout-container");
-  const mobileMaxWidth = 768;
 
   if (!originalPreviewImage || !layoutContainer) {
     console.error("Sticky Preview: Required elements not found.");
@@ -18,6 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
     originalPreviewImage
   );
   originalContainer.appendChild(originalPreviewImage);
+  if (kanseiImage) {
+    originalContainer.appendChild(kanseiImage);
+  }
 
   const placeholder = document.createElement("div");
   placeholder.id = "preview-placeholder";
@@ -27,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let scrollThreshold = 0;
 
   // Sync function to update sticky preview image
-  window.syncStickyPreviewImage = function() {
+  window.syncStickyPreviewImage = function () {
     if (!stickyClone) return;
     // Find the preview image in both original and sticky
     const originalImg = originalContainer.querySelector('img[data-mkresult="true"]');
@@ -54,36 +67,41 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  function isSettingsPanelOpen() {
+    return document.body.classList.contains("settings-panel-open");
+  }
+
+  /**
+   * Handles scroll events to show/hide the sticky clone on mobile.
+   */
   function handleScroll() {
-    // This function now ONLY handles the mobile clone-and-stick behavior.
-    const isMobile = window.innerWidth <= mobileMaxWidth;
-    if (!isMobile) {
-      // If we're not on mobile, ensure any old clone is gone.
+    const isMobile = window.innerWidth <= MOBILE_MAX_WIDTH;
+    if (!isMobile || isSettingsPanelOpen()) {
       destroyStickyClone();
       return;
     }
 
     const scrollY = window.scrollY;
+    const threshold = scrollThreshold + SCROLL_BUFFER_PX;
 
-    // --- MOBILE STICKY THRESHOLD ---
-    // Change the '+ xxx' value below to make the sticky image appear sooner or later.
-    // Higher numbers mean you have to scroll further down before it appears.
-    if (scrollY > scrollThreshold + 10 && !stickyClone) {
+    if (scrollY > threshold && !stickyClone) {
       stickyClone = originalContainer.cloneNode(true);
       stickyClone.classList.add("is-sticky");
       document.body.appendChild(stickyClone);
       originalContainer.classList.add("original-is-hidden");
-      // Sync immediately on creation
       window.syncStickyPreviewImage();
-    } else if (scrollY <= scrollThreshold + 10 && stickyClone) {
+    } else if (scrollY <= threshold && stickyClone) {
       destroyStickyClone();
     }
   }
 
+  /**
+   * Handles window resize to reposition elements appropriately.
+   */
   function handleResize() {
     destroyStickyClone();
 
-    const isMobile = window.innerWidth <= mobileMaxWidth;
+    const isMobile = window.innerWidth <= MOBILE_MAX_WIDTH;
 
     if (isMobile) {
       if (originalContainer.parentNode !== placeholder.parentNode) {
@@ -101,10 +119,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    const _ = placeholder.offsetHeight; // This line forces the browser to reflow.
+    // Force browser reflow
+    void placeholder.offsetHeight;
 
     calculateScrollThreshold();
-    handleScroll(); // Re-run scroll check to apply the new threshold immediately.
+    handleScroll();
   }
 
   // 3. Core Logic Execution

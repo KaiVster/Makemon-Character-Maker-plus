@@ -1,29 +1,31 @@
+/**
+ * @fileoverview Randomizer module for Makemon Character Maker+
+ * Provides random selection functionality for character parts and colors.
+ */
+
+/** @constant {number} Delay before initializing to allow other scripts to load */
+const INIT_DELAY_MS = 100;
+
 // Wait for DOM to be fully loaded and maker to initialize
 window.addEventListener("load", function () {
-  // Wait a moment for the original script to initialize
   setTimeout(function () {
-    // Create the randomizer UI (buttons only)
     createRandomizerUI();
-
-    // Setup randomizer functionality
     setupRandomizerFunctions();
-  }, 100);
+  }, INIT_DELAY_MS);
 });
 
 /**
  * Creates the randomizer UI buttons and adds them to the page
  */
 function createRandomizerUI() {
-  // Find the character preview image to insert the randomizer after it and before the body color section
-  const characterPreview = document.querySelector('img[data-mkresult="true"]');
+  // Find the custom color block first; fallback to the original body color heading
+  const customColorHeading = document.querySelector(
+    'h3[data-translate-key="customColorPickerTitle"]'
+  );
+  const presetsHeading = document.querySelector(
+    'h4[data-translate-key="presetColorsSubheading"]'
+  );
   const bodyColorHeading = document.querySelector("h2.section");
-
-  if (!characterPreview || !bodyColorHeading) {
-    console.error(
-      "Could not find character preview or body color section to place randomizer buttons"
-    );
-    return;
-  }
 
   // Add randomize all button
   const allButton = document.createElement("button");
@@ -42,13 +44,28 @@ function createRandomizerUI() {
 
   // Create a wrapper div for center alignment
   const buttonsWrapper = document.createElement("div");
+  buttonsWrapper.className = "catalog-block";
   buttonsWrapper.style.textAlign = "center";
   buttonsWrapper.style.marginBottom = "15px"; // provides spacing below the buttons
 
   // Append elements to the DOM directly
   buttonsWrapper.appendChild(allButton);
   buttonsWrapper.appendChild(bodyColorButton);
-  bodyColorHeading.parentNode.insertBefore(buttonsWrapper, bodyColorHeading);
+  if (presetsHeading && presetsHeading.parentNode) {
+    presetsHeading.parentNode.appendChild(buttonsWrapper);
+  } else if (customColorHeading && customColorHeading.parentNode) {
+    customColorHeading.parentNode.insertBefore(
+      buttonsWrapper,
+      customColorHeading.nextSibling
+    );
+  } else if (bodyColorHeading && bodyColorHeading.parentNode) {
+    bodyColorHeading.parentNode.insertBefore(buttonsWrapper, bodyColorHeading);
+  } else {
+    console.error(
+      "Could not find a suitable spot to place randomizer buttons (custom color/preset/body color)."
+    );
+    return;
+  }
 
   // Apply translations for the buttons
   if (
@@ -67,24 +84,15 @@ function createRandomizerUI() {
 }
 
 /**
- * Setup event listeners for randomizer buttons
+ * Sets up event listeners for randomizer buttons.
+ * Uses direct function references instead of wrapper functions.
  */
 function setupRandomizerFunctions() {
-  // Setup all randomize button
   const allButton = document.getElementById("randomize-all");
-  if (allButton) {
-    allButton.addEventListener("click", function () {
-      randomizeAll();
-    });
-  }
+  allButton?.addEventListener("click", randomizeAll);
 
-  // Setup body color randomizer button
   const bodyColorButton = document.getElementById("randomize-body-color");
-  if (bodyColorButton) {
-    bodyColorButton.addEventListener("click", function () {
-      randomizeBodyColor();
-    });
-  }
+  bodyColorButton?.addEventListener("click", randomizeBodyColor);
 }
 
 /**

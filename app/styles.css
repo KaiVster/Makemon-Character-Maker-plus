@@ -1,0 +1,1376 @@
+/**
+ * ---------------------------------------------------------------------------
+ *  1. Global Styles
+ * --------------------------------------------------------------------------- */
+
+:root {
+  --preview-width: 300px;
+  --catalog-width: 520px;
+  --catalog-mobile-max: min(390px, calc(100vw - 16px));
+
+  /* Gap customization: Adjust these values to control spacing between panels */
+  --layout-gap: 40px;
+  /* Minimum gap between preview and catalog */
+  --preview-gap-right: 0px;
+  /* Extra gap on right side of preview panel */
+  --catalog-gap-left: 0px;
+  /* Extra gap on left side of catalog container */
+
+  --catalog-item-size: 64px;
+  --catalog-swatch-size: 20px;
+}
+
+.catalog-block {
+  width: var(--catalog-width);
+  max-width: 100%;
+  margin: 12px auto;
+  text-align: center;
+}
+
+/* Extra breathing room between catalog sections */
+.catalog-block:not(:last-child) {
+  margin-bottom: 0px;
+}
+
+#titleImage {
+  width: 100%;
+  max-width: 440px;
+  /* Native resolution - prevents upscaling */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  /* Center the image when smaller than container */
+}
+
+@font-face {
+  font-family: "Noto Sans CJK JP";
+  src: url("app/fonts/NotoSansCJKjp-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  position: relative;
+  background-color: var(--body-true-opaque-bg-color);
+  color: var(--text-color);
+  font-family: "Noto Sans CJK JP", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  2. Main Layout (Flexbox)
+ * --------------------------------------------------------------------------- */
+
+.main-layout-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.content-column {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0 20px;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  3. Content Panels & Tables
+ * --------------------------------------------------------------------------- */
+
+.content-panel {
+  padding: 15px;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  width: 100%;
+  min-width: 100px;
+  box-sizing: border-box;
+}
+
+.content-panel img[src="Makemon/daimei.png"],
+.content-panel img[src^="data:image/png;base64"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-panel img[src="Makemon/daimei.png"] {
+  margin-bottom: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table.bg {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  4. Footer
+ * --------------------------------------------------------------------------- */
+
+footer {
+  width: 100%;
+  padding: 10px 0;
+  color: var(--text-color);
+  text-align: center;
+  margin-top: auto;
+}
+
+.credits-container p {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+.credits-container a {
+  color: var(--primary-accent-color);
+  text-decoration: none;
+}
+
+.credits-container a:hover {
+  text-decoration: underline;
+}
+
+/* Creator Blurb (under title) */
+.creator-blurb {
+  font-size: 0.9em;
+  line-height: 1.7;
+  color: var(--text-color);
+  margin: 0 auto 20px;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+}
+
+.creator-blurb a {
+  color: var(--primary-accent-color);
+}
+
+.creator-blurb .blurb-title {
+  color: #e53972;
+  font-size: 1.1em;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.creator-blurb .blurb-note {
+  font-size: 0.9em;
+  color: var(--secondary-accent-color);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.creator-blurb .blurb-header {
+  font-weight: bold;
+  display: block;
+  margin: 12px 0 0;
+}
+
+.creator-blurb .blurb-section {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.creator-blurb .blurb-hashtag {
+  color: #e53972;
+  font-weight: bold;
+}
+
+/* Plus Version Credits (below catalog) */
+.plus-credits {
+  margin: 0;
+  padding: 0 0 10px 0;
+  font-size: 1.1em;
+  color: var(--text-color);
+}
+
+.plus-credits p {
+  margin: 0;
+  padding: 0;
+}
+
+.plus-credits a {
+  color: var(--primary-accent-color);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  5. General Typography & Utility
+ * --------------------------------------------------------------------------- */
+
+h1 {
+  color: var(--text-color);
+  text-align: center;
+}
+
+h2 {
+  color: var(--secondary-accent-color);
+}
+
+a {
+  color: var(--primary-accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin: 10px 0;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.center {
+  text-align: center;
+}
+
+.padding {
+  padding: 0;
+}
+
+.section {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 24px 0 12px 0;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.7;
+  min-height: 24px;
+  /* extra top space before, small gap after heading */
+}
+
+/* Align catalog headings (e.g., Custom Color, Preset Colors) */
+.catalog-block h2,
+.catalog-block h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-color);
+  margin: 35px 0 12px 0;
+  width: 100%;
+  box-sizing: border-box;
+  line-height: 1.5;
+  min-height: 24px;
+}
+
+/* Add spacing after each catalog section body */
+.catalog-block h2.section+*,
+.catalog-block h3.section+* {
+  margin-bottom: 24px;
+}
+
+/* No top gap for Custom Color */
+.catalog-block [data-translate-key="customColorPickerTitle"] {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+/* Ensure Preset Colors uses the same heading gap */
+.catalog-block [data-translate-key="presetColorsTitle"] {
+  margin: 35px 0 12px 0;
+}
+
+.border {
+  border-color: var(--border-color);
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+img[data-mklayer] {
+  width: var(--catalog-item-size);
+  height: var(--catalog-item-size);
+  margin: 3px;
+}
+
+table.border {
+  border: none;
+}
+
+.mkselect {
+  border: none;
+  box-shadow: 0 0 0 2px #ff4d4d;
+  border-radius: 10px;
+}
+
+.margin {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Hide specific translation keys if necessary */
+[data-translate-key="sectionHeaderBodyColor"] {
+  display: none !important;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  6. Responsive Design (Media Queries)
+ * --------------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  html {
+    overflow-x: hidden;
+  }
+
+  :root {
+    --catalog-item-size: 54px;
+    --catalog-swatch-size: 16px;
+  }
+
+  .main-layout-container {
+    gap: 10px;
+    width: 100%;
+    max-width: min(var(--catalog-width), var(--catalog-mobile-max));
+    margin: 0 auto;
+    padding: 12px;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  .content-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0 12px 12px;
+  }
+
+  table.bg {
+    width: 100%;
+    max-width: min(var(--catalog-width), var(--catalog-mobile-max));
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .catalog-block {
+    width: 100%;
+    max-width: min(var(--catalog-width), var(--catalog-mobile-max));
+    box-sizing: border-box;
+  }
+
+  .content-column {
+    width: 100%;
+    max-width: min(var(--catalog-width), var(--catalog-mobile-max));
+    flex: 0 0 auto;
+  }
+
+  img[data-mkresult="true"] {
+    margin: 10px auto;
+  }
+
+  .main-layout-container>.preview-sticky-container {
+    position: absolute !important;
+    visibility: hidden !important;
+  }
+
+  .main-layout-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: 901px) {
+  .main-layout-container {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: var(--layout-gap);
+    width: 100%;
+    max-width: calc(var(--catalog-width) + var(--preview-width) + var(--layout-gap) + var(--preview-gap-right) + var(--catalog-gap-left)) !important;
+  }
+
+  .content-column {
+    flex: 0 0 var(--catalog-width);
+  }
+
+  .preview-sticky-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10px;
+
+    flex: 0 0 var(--preview-width);
+    align-self: flex-start;
+    padding: 0 var(--preview-gap-right) 20px 0;
+  }
+
+  .content-column table.margin {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 0 0 var(--catalog-gap-left);
+  }
+}
+
+
+
+/* ==========================================================================
+   THEME & VISUAL EFFECTS
+   ========================================================================== */
+
+/*
+ * ---------------------------------------------------------------------------
+ *  1. Theme Definitions (Light, Dark, AMOLED)
+ * --------------------------------------------------------------------------- */
+
+:root {
+  /* Default (Light Theme) */
+  --body-true-opaque-bg-color: #eeeeee;
+  --content-container-bg-color: #ffffff;
+  /* White for content on light theme */
+  --background-image-tint-color: rgba(220,
+      220,
+      220,
+      0.25);
+  /* Tint for body::after */
+  --content-glass-bg: rgba(255, 255, 255, 0.7);
+  --content-glass-border-color: rgba(200, 200, 200, 0.4);
+  --bg-color: #f2f2f2;
+  --text-color: #111111;
+  --primary-accent-color: #0066cc;
+  /* links color */
+  --secondary-accent-color: #555555;
+  --button-bg-color: #f0f0f0;
+  --button-text-color: #333333;
+  --button-border-color: #ccc;
+  --button-hover-bg-color: #e0e0e0;
+  --button-selected-bg-color: #d0d0d0;
+  --button-selected-text-color: #333;
+  --border-color: #494949;
+  --preview-glass-bg: rgba(255, 255, 255, 0.2);
+  --preview-glass-border: rgba(0, 0, 0, 0.12);
+  --preview-glass-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  --tooltip-bg-color: #333;
+  --tooltip-text-color: #fff;
+  --footer-glass-background: rgba(238, 238, 238, 0.55);
+  /* Light theme glass */
+  --footer-border-color: rgba(102,
+      102,
+      102,
+      0.3);
+  /* Lighter border for light theme */
+
+
+  /* Light arrow Keys for input spinner */
+  --input-spinner-up-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23333333' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23333333' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-up-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23000000' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23000000' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+body.theme-dark {
+  --body-true-opaque-bg-color: #333333;
+  --content-container-bg-color: #272727;
+  /* Dark gray for content on dark theme */
+  --background-image-tint-color: rgba(40, 40, 40, 0.5);
+  --content-glass-bg: rgba(60, 60, 60, 0.7);
+  --content-glass-border-color: rgba(100, 100, 100, 0.4);
+  --bg-color: #333333;
+  --text-color: #e6e6e6;
+  --primary-accent-color: #66ccff;
+  --secondary-accent-color: #bbbbbb;
+  --button-bg-color: #555555;
+  --button-text-color: #eeeeee;
+  --button-border-color: #777777;
+  --button-hover-bg-color: #666666;
+  --button-selected-bg-color: #444444;
+  --button-selected-text-color: #eeeeee;
+  --border-color: #ffffff49;
+  --preview-glass-bg: rgba(34, 34, 34, 0.35);
+  --preview-glass-border: rgba(255, 255, 255, 0.18);
+  --preview-glass-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+  --tooltip-bg-color: #222;
+  --tooltip-text-color: #ddd;
+  --footer-glass-background: rgba(51, 51, 51, 0.55);
+  /* Dark theme glass */
+  --footer-border-color: rgba(136,
+      136,
+      136,
+      0.3);
+  /* Lighter border for dark theme */
+
+  /* Dark arrow Keys for input spinner */
+  --input-spinner-up-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23EEEEEE' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23EEEEEE' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-up-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23FFFFFF' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23FFFFFF' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+body.theme-amoled {
+  --body-true-opaque-bg-color: #000000;
+  --content-container-bg-color: #121212;
+  /* Very dark gray for content on AMOLED */
+  --background-image-tint-color: rgba(20, 20, 20, 0.6);
+  --content-glass-bg: rgba(35, 35, 35, 0.7);
+  --content-glass-border-color: rgba(85, 85, 85, 0.4);
+  --bg-color: #000000;
+  --text-color: #e6e6e6;
+  /* Unified text color for dark/AMOLED */
+  --primary-accent-color: #007bff;
+  --secondary-accent-color: #aaaaaa;
+  --button-bg-color: #1a1a1a;
+  --button-text-color: #dddddd;
+  --button-border-color: #333333;
+  --button-hover-bg-color: #2a2a2a;
+  --button-selected-bg-color: #111111;
+  --button-selected-text-color: #dddddd;
+  --border-color: #505050;
+  --preview-glass-bg: rgba(16, 16, 16, 0.45);
+  --preview-glass-border: rgba(255, 255, 255, 0.12);
+  --preview-glass-shadow: 2px 2px 10px rgba(0, 0, 0, 0.55);
+  --tooltip-bg-color: #111;
+  --tooltip-text-color: #ccc;
+  --footer-glass-background: rgba(20, 20, 20, 0.55);
+  /* AMOLED theme glass */
+  --footer-border-color: rgba(68,
+      68,
+      68,
+      0.3);
+  /* Lighter border for AMOLED theme */
+
+  /* Dark arrow Keys for input spinner */
+  --input-spinner-up-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23DDDDDD' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23DDDDDD' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-up-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23FFFFFF' viewBox='0 0 16 16'%3E%3Cpath d='m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z'/%3E%3C/svg%3E");
+  --input-spinner-down-icon-hover: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23FFFFFF' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  2. Background Effects (Crossfade, Blur, Tint)
+ * --------------------------------------------------------------------------- */
+
+/* Shared styles for both background layers */
+#background-container-1,
+#background-container-2 {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: calc(100% + 24px);
+  height: calc(100% + 24px);
+  background-size: auto;
+  background-position: center center;
+  background-attachment: scroll;
+  background-repeat: repeat;
+  box-shadow: none;
+  box-sizing: border-box;
+  transition: filter 0.5s ease;
+  /* For the blur toggle */
+  filter: blur(2px);
+}
+
+/* Add a pseudo-element for a clean, non-vignette tint */
+#background-container-1::after,
+#background-container-2::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-image-tint-color);
+  z-index: 0;
+  /* Sit on top of parent's bg image */
+}
+
+/* Layer 1: The bottom layer, always present */
+#background-container-1 {
+  z-index: -2;
+}
+
+/* Layer 2: The top layer, used for fading in */
+#background-container-2 {
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.75s ease;
+  /* CONTROLS FADE SPEED. Total "change background" disable time is 2x this value. */
+}
+
+/* State class to trigger the fade */
+body.is-crossfading #background-container-2 {
+  opacity: 1;
+}
+
+/* Blur Toggle */
+body.background-blur-disabled #background-container-1,
+body.background-blur-disabled #background-container-2 {
+  filter: blur(0px);
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  3. Content Panels & Frosted Glass
+ * --------------------------------------------------------------------------- */
+
+table.bg {
+  /* The table now handles the transition between solid and glass */
+  background-color: var(--content-container-bg-color);
+  transition: background-color 0.5s ease, backdrop-filter 0.5s ease;
+  /* This ensures the background respects the rounded corners from the .border class */
+  border-radius: 10px;
+  overflow: hidden;
+  /* Clips the blurred content to the rounded corners */
+}
+
+/* When frosted glass is on, the TABLE gets the effect for a seamless look. */
+body.frosted-content-active table.bg {
+  background-color: var(--preview-glass-bg);
+  border: none;
+  box-shadow: var(--preview-glass-shadow);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.content-panel {
+  /* Panels are now always transparent; background is handled by parent table. */
+  background-color: transparent;
+  transform: translateZ(0);
+  /* Keep for rendering performance */
+  /* Transitions are now on the parent table, so we can remove them here. */
+  transition: none;
+  border: none;
+  /* Explicitly remove cell borders to prevent seams. */
+}
+
+/* Apply frosted glass to footer */
+footer {
+  transition: background-color 0.5s ease, backdrop-filter 0.5s ease;
+  background-color: var(--footer-glass-background) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  border-top: 1px solid var(--footer-border-color) !important;
+}
+
+
+
+/* ==========================================================================
+   UI COMPONENTS
+   ========================================================================== */
+
+/*
+ * ---------------------------------------------------------------------------
+ *  1. Themed Inputs and Color Picker
+ * --------------------------------------------------------------------------- */
+
+/* Themed styles for input fields */
+.themed-input {
+  background-color: var(--button-bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--button-border-color);
+  border-radius: 4px;
+  padding: 5px 10px 5px 5px;
+  /* Add padding for arrows */
+  width: 60px;
+  /* Consistent width for RGB inputs */
+  text-align: center;
+  background-image: var(--input-spinner-up-icon), var(--input-spinner-down-icon);
+  background-repeat: no-repeat, no-repeat;
+  background-position: right 5px top 2px, right 5px bottom 2px;
+  background-size: 10px 10px;
+}
+
+.themed-input.arrow-hover {
+  cursor: pointer;
+  background-image: var(--input-spinner-up-icon-hover),
+    var(--input-spinner-down-icon-hover);
+}
+
+/* Hide the default spinner buttons */
+.themed-input::-webkit-outer-spin-button,
+.themed-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+.themed-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Style for the color swatch input */
+#custom-color-picker {
+  width: 50px;
+  height: 50px;
+  border: none;
+  /* Remove default browser border */
+  padding: 0;
+  /* Remove default padding */
+  cursor: pointer;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  2. Sticky Preview Image
+ * --------------------------------------------------------------------------- */
+
+/* Default state for the preview container (mobile, non-sticky) */
+.preview-sticky-container {
+  /* Behaves like a normal div in its original table cell */
+  width: auto;
+  /* Takes the width of its content or parent constraints */
+}
+
+/* Image within the container (applies generally) */
+.preview-sticky-container img[data-mkresult="true"] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+  /* Max width relative to its container */
+  border: none;
+  box-shadow: var(--preview-glass-shadow);
+  background-color: var(--preview-glass-bg);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  width: 300px;
+  height: 300px;
+}
+
+/* When the original container should be hidden but still take up space */
+.original-is-hidden {
+  visibility: hidden !important;
+}
+
+/* this is exclusively for the cloned sticky element on mobile ui */
+@media (max-width: 900px) {
+  .mk-color-picker-shell {
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 8px;
+  }
+
+  .mk-color-picker .sv-canvas {
+    width: 200px;
+    height: 140px;
+  }
+
+  .mk-color-picker .hue-canvas {
+    width: 200px;
+    height: 16px;
+  }
+
+  .preview-sticky-container img[data-mkresult="true"],
+  .is-sticky img[data-mkresult="true"] {
+    width: min(300px, calc(100vw - 24px));
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .is-sticky {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: min(var(--catalog-width), var(--catalog-mobile-max));
+    max-width: min(var(--catalog-width), var(--catalog-mobile-max));
+    z-index: 1000;
+    background-color: var(--panel-bg-color);
+    padding: 5px 0;
+    text-align: center;
+    margin: 0 auto;
+    box-sizing: border-box;
+    gap: 0;
+  }
+
+  .is-sticky img[data-mkresult="true"] {
+    max-width: 300px;
+    /* Or desired width for sticky mobile view */
+    height: auto;
+  }
+
+  .is-sticky #kansei-reference {
+    display: block;
+    width: auto;
+    /* keep intrinsic size */
+    max-width: min(300px, calc(100vw - 24px));
+    /* allow shrink on narrow screens */
+    height: auto;
+    margin: 0 auto 0;
+  }
+}
+
+/* Extra-narrow mobile (<=390px) color picker sizing */
+@media (max-width: 390px) {
+  .mk-color-picker .sv-canvas {
+    width: 170px;
+    height: 120px;
+  }
+
+  .mk-color-picker .hue-canvas {
+    width: 170px;
+    height: 14px;
+  }
+}
+
+/* Override mobile color picker sizing near the end to beat later base rules */
+@media (max-width: 900px) {
+  .mk-color-picker-shell {
+    padding: 0 12px;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mk-color-picker {
+    align-items: center;
+    width: 100%;
+  }
+
+  .mk-color-picker .sv-canvas {
+    width: 170px;
+    height: 120px;
+  }
+
+  .mk-color-picker .hue-canvas {
+    width: 170px;
+    height: 14px;
+  }
+
+  .mk-color-hex-row {
+    width: 100%;
+    padding: 0 12px;
+    gap: 8px;
+    margin-top: 6px;
+    box-sizing: border-box;
+  }
+
+  .mk-color-hex-row .themed-input {
+    width: 90px !important;
+  }
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  2. Buttons (General, Language, Theme, Feature)
+ * --------------------------------------------------------------------------- */
+
+/* Main Control Button Containers */
+#language-switcher,
+#theme-switcher,
+#feature-controls {
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Shared Button Styles */
+#language-switcher button,
+#theme-switcher button,
+#background-changer button,
+#toggleFrostedGlassButton,
+.ui-controls-panel button {
+  padding: 8px 15px;
+  border: 2px outset var(--button-border-color);
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  margin: 0 8px;
+  font-weight: bold;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+  border-radius: 4px;
+}
+
+/* A general-purpose button style for dynamically created buttons */
+.ui-button {
+  padding: 8px 15px;
+  border: 2px outset var(--button-border-color);
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  margin: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+  border-radius: 4px;
+}
+
+.ui-button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+/* Hover State */
+#language-switcher button:hover,
+#theme-switcher button:hover,
+#background-changer button:hover,
+#toggleFrostedGlassButton:hover,
+.ui-controls-panel button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+/* Selected/Active State */
+#language-switcher button.lang-selected,
+#theme-switcher button.theme-selected,
+#background-changer button.theme-selected,
+body.frosted-content-active #toggleFrostedGlassButton {
+  background-color: var(--button-selected-bg-color);
+  border-style: inset;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+  color: var(--button-selected-text-color);
+}
+
+/* Header Settings Panel -------------------------------------------------- */
+
+.settings-floating-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  pointer-events: none;
+}
+
+.settings-floating-container>* {
+  pointer-events: auto;
+}
+
+.settings-inline-toggle {
+  display: none;
+}
+
+.settings-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px outset var(--button-border-color);
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  z-index: 11;
+}
+
+.settings-button:hover,
+.settings-button:focus-visible {
+  background-color: var(--button-hover-bg-color);
+  outline: none;
+}
+
+.settings-button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.15);
+}
+
+.settings-button-icon {
+  font-size: 1.1rem;
+}
+
+.settings-panel {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  background-color: var(--content-container-bg-color);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+  display: none;
+  width: max-content;
+  max-width: calc(100vw - 40px);
+  flex-direction: column;
+}
+
+.settings-panel.is-open {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.settings-panel-title {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.settings-group+.settings-group {
+  margin-top: 10px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 10px;
+}
+
+.settings-group-label {
+  margin: 0 0 4px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.settings-group-label::after {
+  content: "亜";
+  visibility: hidden;
+  width: 0;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.settings-panel #language-switcher,
+.settings-panel #theme-switcher,
+.settings-panel #background-changer {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.settings-panel #theme-switcher,
+.settings-panel #background-changer {
+  display: flex;
+  justify-content: flex-start;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
+
+.settings-panel #theme-switcher button,
+.settings-panel #background-changer button {
+  flex: 0 1 auto;
+  min-width: auto;
+}
+
+.settings-panel #language-switcher button,
+.settings-panel #theme-switcher button,
+.settings-panel #background-changer button,
+.settings-panel #toggleFrostedGlassButton,
+.settings-panel .ui-button {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  margin: 3px 4px 3px 0;
+  white-space: nowrap;
+  min-width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.catalog-block .ui-button,
+.color-info .ui-button {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  margin: 4px 4px 0 0;
+  white-space: nowrap;
+  min-width: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.catalog-block .ui-button::after,
+.color-info .ui-button::after {
+  content: "亜";
+  visibility: hidden;
+  width: 0;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.settings-panel #language-switcher button::after,
+.settings-panel #theme-switcher button::after,
+.settings-panel #background-changer button::after,
+.settings-panel #toggleFrostedGlassButton::after,
+.settings-panel .ui-button::after {
+  content: "亜";
+  visibility: hidden;
+  width: 0;
+  overflow: hidden;
+  display: inline-block;
+}
+
+@media (max-width: 900px) {
+  .settings-floating-container {
+    position: static;
+    width: 100%;
+    gap: 8px;
+    pointer-events: auto;
+  }
+
+  .desktop-settings-toggle {
+    display: none;
+  }
+
+  .settings-inline-toggle {
+    display: inline-block;
+  }
+
+  .settings-panel {
+    width: 100%;
+    max-width: none;
+    position: static;
+    box-shadow: none;
+    border: 1px solid var(--border-color);
+  }
+
+  body.settings-panel-open .preview-sticky-container,
+  body.settings-panel-open .is-sticky {
+    pointer-events: none;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  3. Color Picker
+ * --------------------------------------------------------------------------- */
+
+.block {
+  display: inline-block;
+  width: var(--catalog-swatch-size);
+  height: var(--catalog-swatch-size);
+  font-size: 0px;
+  padding: 0;
+  margin: 2px;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.mk-color-picker {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: transparent;
+  border-radius: 10px;
+  border: none;
+  box-shadow: none;
+}
+
+.mk-color-picker canvas {
+  border-radius: 8px;
+  cursor: crosshair;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  background: none !important;
+  outline: none;
+}
+
+.mk-color-picker .sv-canvas {
+  width: 240px;
+  height: 170px;
+}
+
+.mk-color-picker .hue-canvas {
+  width: 240px;
+  height: 16px;
+}
+
+.mk-color-picker-shell {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+  flex-wrap: nowrap;
+  gap: 14px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mk-color-hex-row {
+  display: inline-flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: transparent;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.mk-color-hex-row .themed-input {
+  width: 100px !important;
+  height: 30px !important;
+  padding: 6px 10px !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  font-weight: 400 !important;
+  border: 1px solid var(--border-color) !important;
+  background: var(--button-bg-color) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  outline: none !important;
+  border-radius: 8px;
+}
+
+#selected-color-display {
+  border: 1px solid var(--border-color) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+  outline: none !important;
+  border-radius: 8px;
+}
+
+.color-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  padding: 0 12px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+.color-info label {
+  margin-right: 4px;
+}
+
+.color-info .themed-input {
+  width: 60px;
+  height: 32px;
+  padding: 0 10px;
+  padding-right: 18px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 20px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+}
+
+.color-info .ui-button {
+  /* Use same styles as catalog buttons for consistency */
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  margin: 0;
+  white-space: nowrap;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px outset var(--button-border-color);
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 4px;
+  min-width: auto;
+  height: 32px;
+  line-height: normal;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+@media (max-width: 900px) {
+  .color-info {
+    gap: 6px;
+    padding: 0 12px;
+  }
+
+  .color-info .themed-input {
+    width: 52px;
+    height: 28px;
+    padding: 0 6px;
+    padding-right: 16px;
+  }
+
+  .color-info .ui-button {
+    padding: 6px 8px;
+    height: 28px;
+  }
+}
+
+/*
+ * ---------------------------------------------------------------------------
+ *  4. Tooltips & Selection
+ * --------------------------------------------------------------------------- */
+
+.mkselect {
+  border-color: #f00;
+}
+
+.mktooltipcontainer {
+  position: fixed;
+  pointer-events: none;
+  white-space: normal;
+  z-index: 2000;
+  max-width: calc(100vw - 16px);
+  text-align: center;
+}
+
+.mktooltipcontainer .mktooltip {
+  display: inline-block;
+}
+
+.mktooltip {
+  background-color: var(--tooltip-bg-color);
+  border-color: var(--tooltip-bg-color);
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+  color: var(--tooltip-text-color);
+  font-weight: bold;
+  padding: 2px;
+}
+
+#kansei-reference {
+  display: block;
+  width: auto;
+  /* keep intrinsic size */
+  max-width: min(300px, 100%);
+  height: auto;
+  margin: 5px auto 0;
+  filter: none;
+  -webkit-filter: none;
+  image-rendering: auto;
+}

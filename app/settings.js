@@ -69,9 +69,7 @@ function cycleBackground() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    // ========================================
-    // THEME MANAGEMENT
-    // ========================================
+    // --- THEME MANAGEMENT ---
     const themeButtons = {
         light: document.getElementById("theme-light"),
         dark: document.getElementById("theme-dark"),
@@ -101,9 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = safeStorage.get("selectedTheme", DEFAULT_THEME);
     setTheme(VALID_THEMES.includes(savedTheme) ? savedTheme : DEFAULT_THEME);
 
-    // ========================================
-    // VISUAL EFFECTS TOGGLES
-    // ========================================
+    // --- VISUAL EFFECTS TOGGLES ---
     const bodyElement = document.body;
 
     // Frosted Glass Toggle
@@ -156,9 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ========================================
-    // BACKGROUND CHANGER
-    // ========================================
+    // --- BACKGROUND CHANGER ---
     const changeBgButton = document.getElementById("changeBgButton");
     changeBgButton?.addEventListener("click", cycleBackground);
 
@@ -172,9 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("background-container-1").style.backgroundImage = initialImageUrl;
     }
 
-    // ========================================
-    // SETTINGS PANEL UI
-    // ========================================
+    // --- SETTINGS PANEL UI ---
     const settingsPanel = document.getElementById("settings-panel");
     const toggleButtons = document.querySelectorAll('[data-settings-toggle="true"]');
     const desktopContainer = document.querySelector(".settings-floating-container");

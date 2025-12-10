@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     uiStrings: {
       en: typeof uiStrings_en !== "undefined" ? uiStrings_en : {},
       ja: typeof uiStrings_ja !== "undefined" ? uiStrings_ja : {},
+      ko: typeof uiStrings_ko !== "undefined" ? uiStrings_ko : {},
     },
     observer: null,
 
@@ -21,6 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ?.addEventListener("click", () => this.switchLanguage("en"));
       document.getElementById("lang-ja")
         ?.addEventListener("click", () => this.switchLanguage("ja"));
+      document.getElementById("lang-ko")
+        ?.addEventListener("click", () => this.switchLanguage("ko"));
 
       this.switchLanguage(savedLanguage);
       this.initObserver();
@@ -28,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /**
      * Switches the active language and updates all UI elements.
-     * @param {string} lang - The language code ('en' or 'ja')
+     * @param {string} lang - The language code ('en', 'ja', 'ko')
      */
     switchLanguage(lang) {
       if (!this.uiStrings[lang]) {
@@ -38,10 +41,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
       localStorage.setItem("language", lang);
 
-      document.getElementById("lang-en")
-        ?.classList.toggle("lang-selected", lang === "en");
-      document.getElementById("lang-ja")
-        ?.classList.toggle("lang-selected", lang === "ja");
+      // Update active button state
+      document.getElementById("lang-en")?.classList.toggle("lang-selected", lang === "en");
+      document.getElementById("lang-ja")?.classList.toggle("lang-selected", lang === "ja");
+      document.getElementById("lang-ko")?.classList.toggle("lang-selected", lang === "ko");
+
+      // Update body class for font switching
+      document.body.classList.toggle("lang-ko", lang === "ko");
 
       this.applyTranslations(lang);
       updateTitleImage(lang);
@@ -83,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Handle text content translation
         if (key && strings[key]) {
           // Use innerHTML for keys that contain HTML (links, line breaks)
-          const useHTML = key.startsWith('footer_') || key === 'creator_blurb' || key === 'plus_credits';
+          const useHTML = key.startsWith('footer_') || key === 'creator_note' || key === 'plus_credits';
           element[useHTML ? 'innerHTML' : 'textContent'] = strings[key];
         }
 
@@ -133,6 +139,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateTitleImage(lang) {
     const img = document.getElementById('titleImage');
     if (!img) return;
-    img.src = lang === 'ja' ? 'Makemon/daimei.png' : 'Makemon/daimei_eng.png';
+
+    if (lang === 'ko') {
+      img.src = 'Makemon/daimei_kor.png';
+    } else if (lang === 'ja') {
+      img.src = 'Makemon/daimei.png';
+    } else {
+      img.src = 'Makemon/daimei_eng.png'; // Fallback / EN
+    }
   }
 });

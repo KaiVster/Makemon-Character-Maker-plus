@@ -6,7 +6,7 @@
 :root {
   --preview-width: 300px;
   --catalog-width: 520px;
-  --catalog-mobile-max: min(390px, calc(100vw - 16px));
+  --catalog-mobile-max: min(360px, calc(100vw - 16px));
 
   /* Gap customization: Adjust these values to control spacing between panels */
   --layout-gap: 40px;
@@ -35,16 +35,23 @@
 #titleImage {
   width: 100%;
   max-width: 440px;
-  /* Native resolution - prevents upscaling */
+  /* Native resolution */
   height: auto;
   display: block;
-  margin: 0 auto;
-  /* Center the image when smaller than container */
+  margin: 0 auto 20px auto;
 }
 
 @font-face {
   font-family: "Noto Sans CJK JP";
   src: url("app/fonts/NotoSansCJKjp-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans CJK KR";
+  src: url("app/fonts/NotoSansCJKkr-Regular.otf") format("opentype");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -61,7 +68,8 @@ body {
   position: relative;
   background-color: var(--body-true-opaque-bg-color);
   color: var(--text-color);
-  font-family: "Noto Sans CJK JP", Arial, sans-serif;
+  font-family: "Noto Sans CJK JP", "Noto Sans CJK KR", Arial, sans-serif;
+  /* Default fallback */
   font-weight: 400;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
@@ -72,6 +80,11 @@ body {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+}
+
+/* Language specific font override */
+body.lang-ko {
+  font-family: "Noto Sans CJK KR", "Noto Sans CJK JP", Arial, sans-serif;
 }
 
 /*
@@ -114,15 +127,10 @@ body {
   box-sizing: border-box;
 }
 
-.content-panel img[src="Makemon/daimei.png"],
 .content-panel img[src^="data:image/png;base64"] {
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-.content-panel img[src="Makemon/daimei.png"] {
-  margin-bottom: 20px;
 }
 
 table {
@@ -164,8 +172,8 @@ footer {
   text-decoration: underline;
 }
 
-/* Creator Blurb (under title) */
-.creator-blurb {
+/* Creator Note (under title) */
+.creator-note {
   font-size: 0.9em;
   line-height: 1.7;
   color: var(--text-color);
@@ -174,13 +182,17 @@ footer {
   width: 100%;
   max-width: 100%;
   text-align: center;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.creator-blurb a {
+.creator-note a {
   color: var(--primary-accent-color);
 }
 
-.creator-blurb .blurb-title {
+.creator-note .creator-note-title {
   color: #e53972;
   font-size: 1.1em;
   font-weight: bold;
@@ -188,25 +200,25 @@ footer {
   margin-bottom: 8px;
 }
 
-.creator-blurb .blurb-note {
+.creator-note .creator-note-disclaimer {
   font-size: 0.9em;
   color: var(--secondary-accent-color);
   display: block;
   margin-bottom: 12px;
 }
 
-.creator-blurb .blurb-header {
+.creator-note .creator-note-header {
   font-weight: bold;
   display: block;
   margin: 12px 0 0;
 }
 
-.creator-blurb .blurb-section {
+.creator-note .creator-note-section {
   display: block;
   margin-bottom: 12px;
 }
 
-.creator-blurb .blurb-hashtag {
+.creator-note .creator-note-hashtag {
   color: #e53972;
   font-weight: bold;
 }
@@ -364,7 +376,7 @@ table.border {
   .main-layout-container {
     gap: 10px;
     width: 100%;
-    max-width: min(var(--catalog-width), var(--catalog-mobile-max));
+    max-width: var(--catalog-width);
     margin: 0 auto;
     padding: 12px;
     box-sizing: border-box;
@@ -381,20 +393,20 @@ table.border {
 
   table.bg {
     width: 100%;
-    max-width: min(var(--catalog-width), var(--catalog-mobile-max));
+    max-width: var(--catalog-width);
     margin: 0 auto;
     box-sizing: border-box;
   }
 
   .catalog-block {
     width: 100%;
-    max-width: min(var(--catalog-width), var(--catalog-mobile-max));
+    max-width: var(--catalog-width);
     box-sizing: border-box;
   }
 
   .content-column {
     width: 100%;
-    max-width: min(var(--catalog-width), var(--catalog-mobile-max));
+    max-width: var(--catalog-width);
     flex: 0 0 auto;
   }
 

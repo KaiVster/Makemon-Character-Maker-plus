@@ -364,33 +364,33 @@ const uiStrings_en = {
     alt_third_eye_murasaki: "Third eye (Purple)",
     alt_third_eye_silver: "Third eye (Silver)",
 
-    // Creator Blurb (Original by BAYACHAO)
-    creator_blurb:
-        "<span class='blurb-title'>Choose your favorite parts and create your own unique beast!</span>" +
-        "<span class='blurb-note'>*Some parts may not be compatible with each other.</span>" +
-        "<span class='blurb-header'>◆ Please read first ◆</span>" +
-        "<span class='blurb-section'>" +
+    // Creator Note (Original by BAYACHAO)
+    creator_note:
+        "<span class='creator-note-title'>Choose your favorite parts and create your own unique Makemon!</span>" +
+        "<span class='creator-note-disclaimer'>*Some parts may not be compatible with each other.</span>" +
+        "<span class='creator-note-header'>◆ Please read first ◆</span>" +
+        "<span class='creator-note-section'>" +
         "Copyright belongs to the author, " +
         "<a href=\"https://x.com/BAYACHAO\" target=\"_blank\" rel=\"noopener noreferrer\">@BAYACHAO</a>." +
         "</span>" +
-        "<span class='blurb-section'>" +
+        "<span class='creator-note-section'>" +
         "When using as an icon, please include the manufacturer or ID." +
         "</span>" +
-        "<span class='blurb-section'>" +
+        "<span class='creator-note-section'>" +
         "Secondary distribution or commercial use of the created images is prohibited." +
         "</span>" +
-        "<span class='blurb-section'>" +
+        "<span class='creator-note-section'>" +
         "The image is transparent, so you can add any background you like." +
         "</span>" +
-        "<span class='blurb-section'>" +
+        "<span class='creator-note-section'>" +
         "The characters you create can only be used as derivative works. " +
         "<a href=\"https://x.com/BAYACHAO/status/1084767104601972736\" target=\"_blank\">Click here for more details!</a>" +
         "</span>" +
-        "<span class='blurb-section'>" +
-        "<b>Special thanks</b> " +
+        "<span class='creator-note-section'>" +
+        "<b>Special Thanks to</b> " +
         "<a href=\"https://furrytail.sakura.ne.jp/\" target=\"_blank\">Kitsunedo</a> and " +
         "<a href=\"https://x.com/xX_Himbeere_Xx\" target=\"_blank\">Busujima Pastel</a>.<br>" +
-        "<span class='blurb-hashtag'>★ Once completed ★</span> Tweet with " +
+        "<span class='creator-note-hashtag'>★ Once completed ★</span> Tweet with " +
         "<a href=\"https://x.com/search?q=%23MakemonCharacterMaker\" target=\"_blank\">#MakemonCharacterMaker</a>!<br>" +
         "Check out the <a href=\"https://bayachao.wixsite.com/makemon\" target=\"_blank\">Makemon Website!</a>" +
         "</span>",
@@ -402,6 +402,404 @@ const uiStrings_en = {
     footer_original: "Original Concept by: <a href=\"https://x.com/BAYACHAO\" target=\"_blank\" rel=\"noopener noreferrer\">BAYACHAO</a>",
     footer_plus: "+ Version by: <a href=\"https://x.com/KaiVster\" target=\"_blank\" rel=\"noopener noreferrer\">KaiVs</a>",
     footer_copyright: "&copy; 2025 KaiVs. All Rights Reserved | &copy; 2018 BAYACHAO. All Rights Reserved",
+};
+
+const uiStrings_ko = {
+    // Page Title
+    page_title: "메이크몬 캐릭터 메이커 +",
+
+    // UI Elements
+    themeLight: "라이트",
+    themeDark: "다크",
+    themeAmoled: "AMOLED",
+    changeBgButton: "배경 변경",
+    toggleBlur: "블러",
+    toggleFrostedGlass: "유리 효과",
+    settingsLanguageLabel: "언어",
+    settingsThemeLabel: "테마",
+    settingsBackgroundLabel: "배경",
+    settingsButtonLabel: "설정",
+    settingsDrawerToggleLabel: "빠른 설정",
+    lang_en: "EN",
+    lang_ja: "JP",
+    lang_ko: "KR",
+
+    // Randomizer Buttons
+    randomizeAllButton: "전체 랜덤",
+    randomizeBodyColorButton: "몸 색상 랜덤",
+
+    // Color Picker
+    customColorPickerTitle: "커스텀 색상",
+    applyCustomColor: "적용",
+    redLabel: "빨강:",
+    greenLabel: "초록:",
+    blueLabel: "파랑:",
+    presetColorsSubheading: "프리셋 색상",
+    sectionHeaderBodyColor: "몸 색상",
+
+    // Header Image Alt Text
+    headerImageAlt: "메이크몬 캐릭터 메이커",
+
+    // Section Headers
+    sectionHeaderBaseBody: "몸",
+    sectionHeaderBackParts: "등",
+    sectionHeaderEyes: "눈",
+    sectionHeaderNose: "코",
+    sectionHeaderMouth: "입",
+    sectionHeaderEyebrows: "눈썹",
+    sectionHeaderHair: "머리카락",
+    sectionHeaderOutfit: "의상",
+    sectionHeaderAccessories: "액세서리",
+    sectionHeaderOptions: "옵션",
+
+    // Alt Texts - Body
+    alt_fene_mimi: "페네 귀",
+    alt_neko_mimi: "고양이 귀",
+    alt_inu_mimi: "강아지 귀",
+    alt_tare_inu_mimi: "처진 강아지 귀",
+    alt_usa_mimi: "토끼 귀",
+    alt_tare_usa_mimi: "처진 토끼 귀",
+    alt_meri_mimi: "양 귀",
+    alt_uma_mimi: "말 귀",
+    alt_moko_mimi: "모코 귀",
+    alt_kuma_mimi: "곰 귀",
+    alt_dora_mimi: "드래곤 귀",
+    alt_upa_mimi: "우파 귀",
+
+    // Alt Texts - Back
+    alt_fene_shippo: "페네 꼬리",
+    alt_neko_shippo: "고양이 꼬리",
+    alt_inu_shippo: "강아지 꼬리",
+    alt_moko_shippo: "모코 꼬리",
+    alt_uru_shippo: "늑대 꼬리",
+    alt_shima_naga_shippo: "줄무늬 긴 꼬리",
+    alt_dora_shippo: "드래곤 꼬리",
+    alt_meri_you_moko: "양용 모코",
+    alt_tategami: "갈기",
+    alt_kinpatsu_shippo: "금발 꼬리",
+    alt_ginpatsu_shippo: "은발 꼬리",
+    alt_enjeru: "천사",
+    alt_debiru: "악마",
+    alt_yousei: "요정",
+
+    // Alt Texts - Eyes
+    alt_patchiri_mizuiro: "또렷한 눈 (하늘색)",
+    alt_patchiri_ao: "또렷한 눈 (파란색)",
+    alt_patchiri_pinku: "또렷한 눈 (분홍색)",
+    alt_patchiri_aka: "또렷한 눈 (빨간색)",
+    alt_patchiri_kimidori: "또렷한 눈 (연두색)",
+    alt_patchiri_kiiro: "또렷한 눈 (노란색)",
+    alt_patchiri_shirubaa: "또렷한 눈 (은색)",
+    alt_kurikuri_mizuiro: "동그란 눈 (하늘색)",
+    alt_kurikuri_ao: "동그란 눈 (파란색)",
+    alt_kurikuri_pinku: "동그란 눈 (분홍색)",
+    alt_kurikuri_aka: "동그란 눈 (빨간색)",
+    alt_kurikuri_kimidori: "동그란 눈 (연두색)",
+    alt_kurikuri_kiiro: "동그란 눈 (노란색)",
+    alt_kurikuri_shirubaa: "동그란 눈 (은색)",
+    alt_goshikku_mizuiro: "고딕 눈 (하늘색)",
+    alt_goshikku_ao: "고딕 눈 (파란색)",
+    alt_goshikku_pinku: "고딕 눈 (분홍색)",
+    alt_goshikku_aka: "고딕 눈 (빨간색)",
+    alt_goshikku_kimidori: "고딕 눈 (연두색)",
+    alt_goshikku_kiiro: "고딕 눈 (노란색)",
+    alt_goshikku_shirubaa: "고딕 눈 (은색)",
+    alt_donguri_mizuiro: "도토리 눈 (하늘색)",
+    alt_donguri_ao: "도토리 눈 (파란색)",
+    alt_donguri_pinku: "도토리 눈 (분홍색)",
+    alt_donguri_aka: "도토리 눈 (빨간색)",
+    alt_donguri_kimidori: "도토리 눈 (연두색)",
+    alt_donguri_kiiro: "도토리 눈 (노란색)",
+    alt_donguri_shirubaa: "도토리 눈 (은색)",
+    alt_tare_mizuiro: "처진 눈 (하늘색)",
+    alt_tare_ao: "처진 눈 (파란색)",
+    alt_tare_pinku: "처진 눈 (분홍색)",
+    alt_tare_aka: "처진 눈 (빨간색)",
+    alt_tare_kimidori: "처진 눈 (연두색)",
+    alt_tare_kiiro: "처진 눈 (노란색)",
+    alt_tare_shirubaa: "처진 눈 (은색)",
+    alt_jito_mizuiro: "지토 눈 (하늘색)",
+    alt_jito_ao: "지토 눈 (파란색)",
+    alt_jito_pinku: "지토 눈 (분홍색)",
+    alt_jito_aka: "지토 눈 (빨간색)",
+    alt_jito_kimidori: "지토 눈 (연두색)",
+    alt_jito_kiiro: "지토 눈 (노란색)",
+    alt_jito_shirubaa: "지토 눈 (은색)",
+    alt_juerii_mizuiro: "보석 눈 (하늘색)",
+    alt_juerii_ao: "보석 눈 (파란색)",
+    alt_juerii_pinku: "보석 눈 (분홍색)",
+    alt_juerii_aka: "보석 눈 (빨간색)",
+    alt_juerii_kimidori: "보석 눈 (연두색)",
+    alt_juerii_kiiro: "보석 눈 (노란색)",
+    alt_juerii_shirubaa: "보석 눈 (은색)",
+    alt_kuuru_mizuiro: "쿨 눈 (하늘색)",
+    alt_kuuru_ao: "쿨 눈 (파란색)",
+    alt_kuuru_pinku: "쿨 눈 (분홍색)",
+    alt_kuuru_aka: "쿨 눈 (빨간색)",
+    alt_kuuru_kimidori: "쿨 눈 (연두색)",
+    alt_kuuru_kiiro: "쿨 눈 (노란색)",
+    alt_kuuru_shirubaa: "쿨 눈 (은색)",
+    alt_tsun_mizuiro: "츤 눈 (하늘색)",
+    alt_tsun_ao: "츤 눈 (파란색)",
+    alt_tsun_pinku: "츤 눈 (분홍색)",
+    alt_tsun_aka: "츤 눈 (빨간색)",
+    alt_tsun_kimidori: "츤 눈 (연두색)",
+    alt_tsun_kiiro: "츤 눈 (노란색)",
+    alt_tsun_shirubaa: "츤 눈 (은색)",
+    alt_tsuri_mizuiro: "올라간 눈 (하늘색)",
+    alt_tsuri_ao: "올라간 눈 (파란색)",
+    alt_tsuri_pinku: "올라간 눈 (분홍색)",
+    alt_tsuri_aka: "올라간 눈 (빨간색)",
+    alt_tsuri_kimidori: "올라간 눈 (연두색)",
+    alt_tsuri_kiiro: "올라간 눈 (노란색)",
+    alt_tsuri_silver: "올라간 눈 (은색)",
+    alt_sankaku_mizuiro: "삼각 눈 (하늘색)",
+    alt_sankaku_ao: "삼각 눈 (파란색)",
+    alt_sankaku_pink: "삼각 눈 (분홍색)",
+    alt_sankaku_aka: "삼각 눈 (빨간색)",
+    alt_sankaku_kimidori: "삼각 눈 (연두색)",
+    alt_sankaku_kiiro: "삼각 눈 (노란색)",
+    alt_sankaku_silver: "삼각 눈 (은색)",
+    alt_oddoai_1: "오드아이 1",
+    alt_oddoai_2: "오드아이 2",
+    alt_sanpakugan: "삼백안",
+    alt_kyomu: "허무",
+    alt_nikoo: "방긋",
+    alt_bou: "점 눈",
+    alt_bikkuri: "깜짝",
+
+    // Alt Texts - Nose
+    alt_nashi: "없음",
+    alt_ari: "있음",
+    alt_ari_chotto_shita: "있음 (조금 아래)",
+    alt_doragon_you_nashi: "드래곤용 (없음)",
+    alt_doragon_you_hana_ari: "드래곤용 (코 있음)",
+    alt_doragon_you_hana_chotto_shita: "드래곤용 (코 조금 아래)",
+
+    // Alt Texts - Mouth
+    alt_magao: "무표정",
+    alt_mu: "뚱함",
+    alt_osumashi: "새침",
+    alt_nikott: "빙긋",
+    alt_nyaan: "냥",
+    alt_yaeba_nyaan: "덧니 냥",
+    alt_tehepero: "테헤페로",
+    alt_sankaku: "삼각",
+    alt_gyaku_sankaku: "역삼각",
+    alt_puchi_egao: "작은 미소",
+    alt_egao: "미소",
+    alt_anguri: "멍~",
+    alt_nyaha: "냐하",
+    alt_gizappa: "뾰족 이빨",
+    alt_gununu: "끄응",
+    alt_n_point: "음.",
+    alt_fu: "훗",
+    alt_hoe: "호에~",
+
+    // Alt Texts - Eyebrows
+    alt_eyebrows_futsuu: "보통",
+    alt_agari: "올라감",
+    alt_sagari: "내려감",
+    alt_oko: "화남",
+    alt_aori: "도발",
+    alt_kiri: "늠름",
+    alt_kiri_shita: "늠름 (조금 아래)",
+    alt_maro: "마로",
+    alt_maro_shita: "마로 (조금 아래)",
+    alt_futo: "굵음",
+
+    // Alt Texts - Hair
+    alt_hair_nashi: "없음",
+    alt_hair_futsuu: "보통",
+    alt_pattun: "뱅 헤어",
+    alt_sara: "매끈",
+    alt_moko: "모코",
+    alt_yokonagashi: "옆으로 넘김",
+    alt_hoso: "가늠",
+    alt_hidarime_kakure: "왼쪽 눈 가림",
+    alt_migime_kakure: "오른쪽 눈 가림",
+    alt_ryome_kakure: "양쪽 눈 가림",
+    alt_yokogami_fuwa: "옆머리 (푹신)",
+    alt_yokogami_kuri: "옆머리 (곱슬)",
+    alt_yokogami_roll: "옆머리 (롤)",
+    alt_yokogami_sara: "옆머리 (매끈)",
+    alt_kinpatsu: "금발",
+    alt_ginpatsu: "은발",
+    alt_dora_kinpatsu: "드래곤 금발",
+    alt_dora_ginpatsu: "드래곤 은발",
+    alt_ikkaku: "외뿔",
+
+    // Alt Texts - Outfits
+    alt_outfit_nashi: "없음",
+    alt_scarf_red: "스카프 (빨강)",
+    alt_scarf_blue: "스카프 (파랑)",
+    alt_scarf_black: "스카프 (검정)",
+    alt_mizugi_mizuiro: "수영복 (하늘색)",
+    alt_mizugi_green: "수영복 (초록)",
+    alt_mizugi_purple: "수영복 (보라)",
+    alt_muffler_red: "머플러 (빨강)",
+    alt_muffler_blue: "머플러 (파랑)",
+    alt_muffler_yellow: "머플러 (노랑)",
+    alt_muffler_green: "머플러 (초록)",
+    alt_muffler_purple: "머플러 (보라)",
+    alt_muffler_white: "머플러 (망토)",
+    alt_muffler_gray: "머플러 (회색)",
+    alt_dress_red: "드레스 (빨강)",
+    alt_dress_blue: "드레스 (파랑)",
+    alt_dress_black: "드레스 (검정)",
+    alt_dress_pink: "드레스 (분홍)",
+    alt_dress_mizuiro: "드레스 (하늘색)",
+    alt_dress_purple: "드레스 (보라)",
+    alt_dress_green: "드레스 (초록)",
+    alt_manto: "망토",
+    alt_kizoku_red: "귀족 (빨강)",
+    alt_kizoku_mizuiro: "귀족 (하늘색)",
+    alt_kizoku_purple: "귀족 (보라)",
+    alt_kizoku_orange: "귀족 (주황)",
+    alt_kizoku_green: "귀족 (초록)",
+    alt_kizoku_black: "귀족 (검정)",
+    alt_cape_orange: "케이프 (주황)",
+    alt_cape_yellow: "케이프 (노랑)",
+    alt_cape_mizuiro: "케이프 (하늘색)",
+    alt_cape_purple: "케이프 (보라)",
+    alt_cape_pink: "케이프 (분홍)",
+    alt_fuwaeri_white: "푹신한 카라 (흰색)",
+    alt_fuwaeri_black: "푹신한 카라 (검정)",
+    alt_sorcier_robe_red: "마법사 로브 (빨강)",
+    alt_sorcier_robe_blue: "마법사 로브 (파랑)",
+    alt_sorcier_poncho_red: "마법사 판초 (빨강)",
+    alt_sorcier_poncho_pink: "마법사 판초 (분홍)",
+    alt_sorcier_poncho_blue: "마법사 판초 (파랑)",
+    alt_sorcier_poncho_mizuiro: "마법사 판초 (하늘색)",
+    alt_sorcier_poncho_black: "마법사 판초 (검정)",
+    alt_sorcier_robe_green: "마법사 로브 (초록)",
+    alt_sorcier_robe_purple: "마법사 로브 (보라)",
+    alt_yamato_kimono_kurenai: "야마토 기모노 (진홍)",
+    alt_yamato_kimono_momo: "야마토 기모노 (복숭아)",
+    alt_yamato_kimono_daidai: "야마토 기모노 (주황)",
+    alt_yamato_kimono_uguisu: "야마토 기모노 (연두)",
+    alt_yamato_kimono_mizuiro: "야마토 기모노 (하늘색)",
+    alt_suit_black: "정장 (검정)",
+    alt_suit_white: "정장 (흰색)",
+    alt_marine_sailor_white: "마린 세일러 (흰색)",
+    alt_marine_sailor_black: "마린 세일러 (검정)",
+    alt_yamato_suzu_kurenai: "야마토 방울 (진홍)",
+    alt_yamato_suzu_ao: "야마토 방울 (파랑)",
+
+    // Alt Texts - Accessories
+    alt_accessories_nashi: "없음",
+    alt_deka_ribbon_pink: "큰 리본 (분홍)",
+    alt_deka_ribbon_mizuiro: "큰 리본 (하늘색)",
+    alt_deka_ribbon_purple: "큰 리본 (보라)",
+    alt_katyusha_pink: "카츄샤 (분홍)",
+    alt_katyusha_mizuiro: "카츄샤 (하늘색)",
+    alt_katyusha_black: "카츄샤 (검정)",
+    alt_brooch_red: "브로치 (빨강)",
+    alt_brooch_blue: "브로치 (파랑)",
+    alt_brooch_green: "브로치 (초록)",
+    alt_ribbon_red: "리본 (빨강)",
+    alt_ribbon_blue: "리본 (파랑)",
+    alt_ribbon_gray: "리본 (회색)",
+    alt_ribbon_black: "리본 (검정)",
+    alt_flower_shiro: "꽃 (흰색)",
+    alt_flower_pink: "꽃 (분홍)",
+    alt_flower_mizuiro: "꽃 (하늘색)",
+    alt_yamato_ume_kurenai: "야마토 매화 (진홍)",
+    alt_yamato_ume_kuro: "야마토 매화 (검정)",
+    alt_kazarihimo_kurenai: "장식 끈 (진홍)",
+    alt_kazarihimo_kon: "장식 끈 (남색)",
+    alt_oukan_red: "왕관 (빨강)",
+    alt_oukan_blue: "왕관 (파랑)",
+    alt_oukan_purple: "왕관 (보라)",
+    alt_oukan_green: "왕관 (초록)",
+    alt_oukan_yellow: "왕관 (노랑)",
+    alt_oukan_pink: "왕관 (분홍)",
+    alt_oukan_black: "왕관 (검정)",
+    alt_casquette_red: "뉴스보이 캡 (빨강)",
+    alt_casquette_blue: "뉴스보이 캡 (파랑)",
+    alt_casquette_green: "뉴스보이 캡 (초록)",
+    alt_casquette_white: "뉴스보이 캡 (흰색)",
+    alt_silkhat_red: "실크 해트 (빨강)",
+    alt_silkhat_blue: "실크 해트 (파랑)",
+    alt_fennec_beret_red: "페넥 베레모 (빨강)",
+    alt_fennec_beret_blue: "페넥 베레모 (파랑)",
+    alt_fennec_beret_gray: "페넥 베레모 (회색)",
+    alt_vivid_knit_red: "비비드 니트 (빨강)",
+    alt_vivid_knit_blue: "비비드 니트 (파랑)",
+    alt_vivid_knit_yellow: "비비드 니트 (노랑)",
+    alt_vivid_knit_green: "비비드 니트 (초록)",
+    alt_vivid_knit_black: "비비드 니트 (검정)",
+    alt_tongari_boushi_black: "고깔 모자 (검정)",
+    alt_tongari_boushi_white: "고깔 모자 (흰색)",
+    alt_tongari_boushi_pink: "고깔 모자 (분홍)",
+    alt_tongari_boushi_mizuiro: "고깔 모자 (하늘색)",
+    alt_biidama_pink: "구슬 (분홍)",
+    alt_biidama_blue: "구슬 (파랑)",
+    alt_biidama_black: "구슬 (검정)",
+    alt_usamimi_red: "토끼 귀 (빨강)",
+    alt_usamimi_blue: "토끼 귀 (파랑)",
+    alt_usamimi_green: "토끼 귀 (초록)",
+    alt_usamimi_white: "토끼 귀 (흰색)",
+    alt_usamimi_black: "토끼 귀 (검정)",
+    alt_yotsuba: "네잎클로버",
+    alt_pilot_goggle: "파일럿 고글",
+
+    // Alt Texts - Options
+    alt_options_nashi: "없음",
+    alt_shiromaru: "흰 동그라미",
+    alt_shiro_sankaku: "흰 삼각형",
+    alt_onaka_kemo: "배 (케모)",
+    alt_onaka_dora: "배 (드래곤)",
+    alt_hoppe_pink: "볼 (분홍)",
+    alt_hoppe_orange: "볼 (주황)",
+    alt_megane: "안경",
+    alt_maru_megane: "둥근 안경",
+    alt_maru_megane_sho: "둥근 안경 (소)",
+    alt_monocle_migi: "모노클 (오른쪽)",
+    alt_monocle_hidari: "모노클 (왼쪽)",
+    alt_moyou_1: "무늬 1",
+    alt_moyou_2: "무늬 2",
+    alt_namida_bokuro: "눈물점",
+    alt_kizu_sho: "흉터 (소)",
+    alt_kizu_dai: "흉터 (대)",
+    alt_third_eye_aka: "제3의 눈 (빨강)",
+    alt_third_eye_murasaki: "제3의 눈 (보라)",
+    alt_third_eye_silver: "제3의 눈 (은색)",
+
+
+
+    // Creator Note
+    creator_note:
+        "<span class='creator-note-title'>좋아하는 파츠를 선택하여 나만의 마물을 만들어보세요!</span>" +
+        "<span class='creator-note-disclaimer'>*일부 파츠는 서로 호환되지 않을 수 있습니다.</span>" +
+        "<span class='creator-note-header'>◆ 먼저 읽어주세요 ◆</span>" +
+        "<span class='creator-note-section'>" +
+        "저작권은 원작자 <a href=\"https://x.com/BAYACHAO\" target=\"_blank\" rel=\"noopener noreferrer\">@BAYACHAO</a>에게 있습니다.<br>" +
+        "아이콘으로 사용할 경우 제작자 이름이나 ID를 표기해주세요.<br>" +
+        "제작된 이미지의 2차 배포 및 상업적 이용은 금지되어 있습니다." +
+        "</span>" +
+        "<span class='creator-note-section'>" +
+        "이미지는 투명 배경이므로 원하는 배경을 추가할 수 있습니다.<br>" +
+        "만든 캐릭터는 2차 창작물로만 사용할 수 있습니다." +
+        "<a href=\"https://x.com/BAYACHAO/status/1084767104601972736\" target=\"_blank\">자세한 내용은 여기를 클릭!</a>" +
+        "</span>" +
+        "<span class='creator-note-section'>" +
+        "<b>특별한 감사</b> " +
+        "<a href=\"https://furrytail.sakura.ne.jp/\" target=\"_blank\">키츠네도</a>와 " +
+        "<a href=\"https://x.com/xX_Himbeere_Xx\" target=\"_blank\">부스지마 파스텔</a>.<br>" +
+        "<span class='creator-note-hashtag'>★ 완성 후 ★</span> " +
+        "<a href=\"https://x.com/search?q=%23MakemonCharacterMaker\" target=\"_blank\">#메이크몬캐릭터메이커</a> 태그와 함께 트윗하세요!<br>" +
+        "※이미지는 자동 첨부되지 않습니다<br>" +
+        "<a href=\"https://bayachao.wixsite.com/makemon\" target=\"_blank\">메이크몬 웹사이트 확인하기!</a>" +
+        "</span>",
+
+    // Plus Version Credits
+    plus_credits: "+ (플러스) 버전: <a href=\"https://x.com/KaiVster\" target=\"_blank\" rel=\"noopener noreferrer\">KaiVs</a>",
+
+    // Footer
+    footer_original: "원안: <a href=\"https://x.com/BAYACHAO\" target=\"_blank\" rel=\"noopener noreferrer\">BAYACHAO</a>",
+    footer_plus: "+ (플러스) 버전: <a href=\"https://x.com/KaiVster\" target=\"_blank\" rel=\"noopener noreferrer\">KaiVs</a>",
+    footer_copyright: "&copy; 2025 KaiVs. 무단 전재를 금합니다 | &copy; 2018 BAYACHAO. 무단 전재를 금합니다",
 };
 
 const uiStrings_ja = {
@@ -765,32 +1163,32 @@ const uiStrings_ja = {
     alt_third_eye_murasaki: "サードアイ(紫)",
     alt_third_eye_silver: "サードアイ(シルバー)",
 
-    // Creator Blurb (Original by BAYACHAO)
-    creator_blurb:
-        "<span class='blurb-title'>好きなパーツを選んで自分だけの魔けもを作ろう！</span>" +
-        "<span class='blurb-note'>※パーツによっては相性の悪い組み合わせもあります。</span>" +
-        "<span class='blurb-header'>◆ はじめにお読みください ◆</span>" +
-        "<span class='blurb-section'>" +
+    // Creator Note (Original by BAYACHAO)
+    creator_note:
+        "<span class='creator-note-title'>好きなパーツを選んで自分だけの魔けもを作ろう！</span>" +
+        "<span class='creator-note-disclaimer'>※パーツによっては相性の悪い組み合わせもあります。</span>" +
+        "<span class='creator-note-header'>◆ はじめにお読みください ◆</span>" +
+        "<span class='creator-note-section'>" +
         "著作権は作者である <a href=\"https://x.com/BAYACHAO\" target=\"_blank\" rel=\"noopener noreferrer\">@BAYACHAO</a> にあります。" +
         "</span>" +
-        "<span class='blurb-section'>" +
+        "<span class='creator-note-section'>" +
         "アイコンに使用する際は製作者またはIDを併記してください。" +
         "</span>" +
-        "<span class='blurb-section'>" +
+        "<span class='creator-note-section'>" +
         "作成した画像の再配布や商用利用は禁止です。" +
         "</span>" +
-        "<span class='blurb-section'>" +
+        "<span class='creator-note-section'>" +
         "画像は透過済ですのでお好きな背景を付けて下さって構いません。" +
         "</span>" +
-        "<span class='blurb-section'>" +
+        "<span class='creator-note-section'>" +
         "作ったキャラクターは二次創作としてのみ使用可能です。" +
         "<a href=\"https://x.com/BAYACHAO/status/1084767104601972736\" target=\"_blank\">詳しくはこちら！</a>" +
         "</span>" +
-        "<span class='blurb-section'>" +
-        "<b>Special Thanks！</b>" +
+        "<span class='creator-note-section'>" +
+        "<b>スペシャルサンクス</b>" +
         "<a href=\"https://furrytail.sakura.ne.jp/\" target=\"_blank\">きつねどう様</a>。" +
         "<a href=\"https://x.com/xX_Himbeere_Xx\" target=\"_blank\">毒島ぱすてる様</a>。<br>" +
-        "<span class='blurb-hashtag'>★ 完成したら ★</span> " +
+        "<span class='creator-note-hashtag'>★ 完成したら ★</span> " +
         "<a href=\"https://x.com/search?q=%23魔けもキャラメーカー\" target=\"_blank\">#魔けもキャラメーカー</a> でツイートしよう！<br>" +
         "※画像は自動で添付されません<br>" +
         "<a href=\"https://bayachao.wixsite.com/makemon\" target=\"_blank\">魔けモンのウェブサイトをチェック！</a>" +

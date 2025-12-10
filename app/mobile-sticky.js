@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  // 1. Create the container and placeholder
+  // --- INIT DOM ELEMENTS ---
   const originalContainer = document.createElement("div");
   originalContainer.className = "preview-sticky-container";
   originalPreviewImage.parentNode.insertBefore(
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // 2. Define Core Functions
+  // --- CORE FUNCTIONS ---
   function calculateScrollThreshold() {
     scrollThreshold = placeholder.offsetTop;
   }
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     handleScroll();
   }
 
-  // 3. Core Logic Execution
+  // --- EXECUTION ---
   function init() {
     handleResize(); // Run once on load to set the correct initial position.
     window.addEventListener("scroll", handleScroll);

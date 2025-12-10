@@ -1,7 +1,7 @@
 window.addEventListener("load", function () {
   // --- CONSTANTS ---
   const HEX_REGEX = /^#[0-9a-fA-F]{6}$/;
-  const MOBILE_BREAKPOINT = 390;
+  const MOBILE_BREAKPOINT = 360;
   const TABLET_BREAKPOINT = 900;
   const ARROW_ZONE_WIDTH_PX = 20;
   const INIT_TIMEOUT_MS = 8000;
@@ -98,7 +98,7 @@ window.addEventListener("load", function () {
   const init = (bodyColorSectionParam) => {
     // --- SCRIPT INITIALIZATION ---
     // The script identifies the 'Body Color' section to inject the UI.
-    // MODIFICATION: If you rename the `sectionHeaderBodyColor` key in `language.js`, update it here too.
+    // If you rename the `sectionHeaderBodyColor` key in `language.js`, update it here too.
     const bodyColorSection =
       bodyColorSectionParam ||
       document.querySelector(
@@ -114,7 +114,7 @@ window.addEventListener("load", function () {
 
     // --- UI ELEMENT CREATION ---
     // This section dynamically creates the HTML elements for the color picker.
-    // CUSTOMIZATION: To change the appearance (e.g., styles, layout), modify the `style` properties of these elements.
+    // To change the appearance (e.g., styles, layout), modify the `style` properties of these elements.
 
     const title = document.createElement("h3");
     title.setAttribute("data-translate-key", "customColorPickerTitle");
@@ -372,6 +372,7 @@ window.addEventListener("load", function () {
     renderSVCanvas();
 
     // --- EVENT HANDLERS (HSV CANVAS) ---
+    // Update color based on X position for Hue
     const handleHue = (clientX) => {
       const rect = hueCanvas.getBoundingClientRect();
       const x = clamp01((clientX - rect.left) / rect.width);
@@ -379,6 +380,7 @@ window.addEventListener("load", function () {
       applyStateToUI();
     };
 
+    // Update saturation/value based on X/Y position
     const handleSV = (clientX, clientY) => {
       const rect = svCanvas.getBoundingClientRect();
       const x = clamp01((clientX - rect.left) / rect.width);
@@ -391,6 +393,7 @@ window.addEventListener("load", function () {
     let draggingHue = false;
     let draggingSV = false;
 
+    // Mouse Events
     hueCanvas.addEventListener("mousedown", (e) => {
       draggingHue = true;
       handleHue(e.clientX);
@@ -405,6 +408,35 @@ window.addEventListener("load", function () {
       if (draggingSV) handleSV(e.clientX, e.clientY);
     });
     window.addEventListener("mouseup", () => {
+      draggingHue = false;
+      draggingSV = false;
+    });
+
+    // Touch Events
+    hueCanvas.addEventListener("touchstart", (e) => {
+      draggingHue = true;
+      e.preventDefault(); // Stop scrolling
+      handleHue(e.touches[0].clientX);
+    }, { passive: false });
+
+    svCanvas.addEventListener("touchstart", (e) => {
+      draggingSV = true;
+      e.preventDefault(); // Stop scrolling
+      handleSV(e.touches[0].clientX, e.touches[0].clientY);
+    }, { passive: false });
+
+    window.addEventListener("touchmove", (e) => {
+      if (draggingHue) {
+        e.preventDefault(); // Stop scrolling
+        handleHue(e.touches[0].clientX);
+      }
+      if (draggingSV) {
+        e.preventDefault(); // Stop scrolling
+        handleSV(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    }, { passive: false });
+
+    window.addEventListener("touchend", () => {
       draggingHue = false;
       draggingSV = false;
     });

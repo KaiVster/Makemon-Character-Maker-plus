@@ -6,7 +6,7 @@
 - **Layered Character Composition**
 - **Custom Color Picker**
 - **Randomizer**
-- **English and Japanese language support**
+- **English, Japanese and Korean language support**
 - **Mobile Support**
 
 ### Themes & Effects
